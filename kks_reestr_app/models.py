@@ -198,9 +198,9 @@ class KksOrganizationCodeModel(models.Model):
     """
     KKS код организации (3 сектор)
     """
-    kks_org_object = models.ForeignKey(KksObjectModel, on_delete=models.PROTECT, verbose_name='Объект', null=False,
-                                       default=None)
-    kks_org_code = models.IntegerField(verbose_name="Код организации")
+    kks_org_code = models.CharField(verbose_name="Код организации", max_length=3,
+                                    validators=[MinLengthValidator(3)],
+                                    help_text='3 символа')
     kks_org_description = models.CharField(verbose_name="Наименование организации", max_length=150)
     kks_org_visible = models.BooleanField(default=True, verbose_name='Видимость')
 
@@ -231,9 +231,11 @@ class KksTypeBuildingModel(models.Model):
     """
     KKS код типа здания (4 сектор)
     """
+    kks_object = models.ForeignKey(KksObjectModel, verbose_name='Объект', on_delete=models.PROTECT, default=None,
+                                   null=True)
     kks_type_building_code = models.CharField(verbose_name="Код KKS типа здания (сектора 4)",
                                               max_length=1)
-    kks_type_building_description = models.CharField(verbose_name="Наименование организации", max_length=150)
+    kks_type_building_description = models.CharField(verbose_name="Описание", max_length=150)
 
     class Meta:
         verbose_name = _("kks код типа здания")
@@ -280,8 +282,9 @@ class KksTechnicalSpecialtyModel(models.Model):
     KKS код сектор 7
     """
     kks_tech_speciality = models.CharField(verbose_name="Код технической специальности", max_length=3,
+                                           validators=[MinLengthValidator(3)],
                                            help_text="3 цифры, согласно таблице В.1 приложения В")
-    kks_tech_speciality_description = models.CharField(verbose_name="Описание", max_length=100)
+    kks_tech_speciality_description = models.CharField(verbose_name="Описание", max_length=250)
 
     class Meta:
         verbose_name = _("kks код технической специальности")
@@ -312,17 +315,21 @@ class KksBuildingModel(models.Model):
     """
     Здания, сектор 5.1
     """
-    kks_object = models.ForeignKey(KksObjectModel, verbose_name="Объект", on_delete=models.PROTECT, default=None,
-                                   null=False)
+    # kks_object = models.ForeignKey(KksObjectModel, verbose_name="Объект", on_delete=models.PROTECT, default=None,
+    #                                null=False)
+    kks_type_building = models.ForeignKey(KksTypeBuildingModel, verbose_name='Тип здания (сектор 4)',
+                                          on_delete=models.PROTECT,
+                                          default=None, null=True)
     kks_building_abr = models.CharField(verbose_name="Kks код здания", max_length=4, validators=[MinLengthValidator(4)])
     kks_building_description = models.CharField(verbose_name="Описание здания", max_length=150)
+    kks_building_visible = models.BooleanField(verbose_name='Видимость', default=True)
 
     class Meta:
         verbose_name = _("kks код здания")
         verbose_name_plural = _("kks коды зданий")
 
     def __str__(self):
-        return f'{self.kks_object}: {self.kks_building_abr} - {self.kks_building_description}'
+        return f'{self.kks_type_building.kks_object} | Сектор 4: {self.kks_type_building.kks_type_building_code} | {self.kks_building_abr} - {self.kks_building_description}'
 
 
 class KksHighMarkModel(models.Model):
@@ -372,8 +379,8 @@ class KksCodeSystemOrganizationModel(models.Model):
     kks_system_organization_visible = models.BooleanField(default=True, verbose_name="Видимость")
 
     class Meta:
-        verbose_name = _('kks код системы у объекта')
-        verbose_name_plural = _("kks коды систем у объектов")
+        verbose_name = _('код системы у объекта')
+        verbose_name_plural = _("коды систем у объектов")
 
     def __str__(self):
         return f'{self.kks_object} - {self.kks_system}'
