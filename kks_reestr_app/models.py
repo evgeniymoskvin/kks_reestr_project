@@ -191,7 +191,7 @@ class KksStageObjectModel(models.Model):
         verbose_name_plural = _("этапы у объектов")
 
     def __str__(self):
-        return f'{self.kks_object} - {self.kks_stage}'
+        return f'{self.kks_object.kks_object_abr} | {self.kks_stage}'
 
 
 class KksOrganizationCodeModel(models.Model):
@@ -242,7 +242,7 @@ class KksTypeBuildingModel(models.Model):
         verbose_name_plural = _("kks коды типов зданий")
 
     def __str__(self):
-        return f'{self.kks_type_building_code}: {self.kks_type_building_description}'
+        return f'{self.kks_object.kks_object_abr} | {self.kks_type_building_code}: {self.kks_type_building_description}'
 
 
 class KksSector5Model(models.Model):
@@ -315,8 +315,8 @@ class KksBuildingModel(models.Model):
     """
     Здания, сектор 5.1
     """
-    # kks_object = models.ForeignKey(KksObjectModel, verbose_name="Объект", on_delete=models.PROTECT, default=None,
-    #                                null=False)
+    kks_object = models.ForeignKey(KksObjectModel, verbose_name="Объект", on_delete=models.PROTECT, default=None,
+                                   null=False)
     kks_type_building = models.ForeignKey(KksTypeBuildingModel, verbose_name='Тип здания (сектор 4)',
                                           on_delete=models.PROTECT,
                                           default=None, null=True)
@@ -329,7 +329,7 @@ class KksBuildingModel(models.Model):
         verbose_name_plural = _("kks коды зданий")
 
     def __str__(self):
-        return f'{self.kks_type_building.kks_object} | Сектор 4: {self.kks_type_building.kks_type_building_code} | {self.kks_building_abr} - {self.kks_building_description}'
+        return f'{self.kks_type_building.kks_object.kks_object_abr} | {self.kks_type_building.kks_type_building_code}.{self.kks_building_abr} | {self.kks_building_description}'
 
 
 class KksHighMarkModel(models.Model):

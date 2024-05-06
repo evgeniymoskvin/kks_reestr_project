@@ -1,0 +1,13 @@
+{% extends "kks_reestr_app/base.html" %}
+{% load static %}
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ kks_form }}
+    <button type="submit"> Ok </button>
+    </form>
+{% endblock %}
