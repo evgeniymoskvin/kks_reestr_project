@@ -1,0 +1,15 @@
+.input_kks {
+    display: none;
+}
+
+.input_kks + label{
+    color: red;
+}
+
+.input_kks:hover +label{
+    color: #0a53be;
+}
+
+.input_kks:checked +label{
+    color: green;
+}

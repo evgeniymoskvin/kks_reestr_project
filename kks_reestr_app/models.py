@@ -283,12 +283,15 @@ class KksTechnicalSpecialtyModel(models.Model):
     """
     kks_tech_speciality = models.CharField(verbose_name="Код технической специальности", max_length=3,
                                            validators=[MinLengthValidator(3)],
-                                           help_text="3 цифры, согласно таблице В.1 приложения В")
+                                           help_text="3 цифр, согласно таблице В.1 приложения В, "
+                                                     "за исключением конструкторской документации")
     kks_tech_speciality_description = models.CharField(verbose_name="Описание", max_length=250)
+    kks_tech_speciality_show = models.BooleanField(verbose_name='Видимость', default=True)
+    kks_tech_speciality_construction = models.BooleanField(verbose_name='Конструкторская документация', default=False)
 
     class Meta:
         verbose_name = _("kks код технической специальности")
-        verbose_name_plural = _("kks коды технических специальностей")
+        verbose_name_plural = _("kks коды технических специальностей (сектор 7)")
 
     def __str__(self):
         return f'{self.kks_tech_speciality} - {self.kks_tech_speciality_description}'

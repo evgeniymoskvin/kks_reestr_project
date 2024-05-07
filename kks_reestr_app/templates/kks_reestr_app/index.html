@@ -7,7 +7,16 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        {{ kks_form }}
-    <button type="submit"> Ok </button>
+        {% for obj in objects %}
+            <div>
+                <input class="input_kks" type="radio" name="kks_object_number" value="{{ obj.id }}" id="{{ obj.kks_object_abr }}" hidden>
+                <label for="{{ obj.kks_object_abr }}">{{ obj }}</label>
+            </div>
+        {% endfor %}
+        <button class="btn btn-dark" type="submit"> Ok</button>
     </form>
+{% endblock %}
+
+{% block script %}
+
 {% endblock %}

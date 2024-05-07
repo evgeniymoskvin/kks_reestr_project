@@ -10,18 +10,27 @@ from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 
-from .models import KksCodeModel
+from .models import KksCodeModel, KksObjectModel
 
 from .forms import KksCodeForm
 
+
 class IndexView(View):
     def get(self, request):
-        kks_form = KksCodeForm()
-        content = {'kks_form': kks_form}
+        # kks_form = KksCodeForm()
+        objects = KksObjectModel.objects.get_queryset().filter(kks_object_show=True)
+        content = {'objects': objects}
+        # content = {'kks_form': kks_form}
         return render(request, 'kks_reestr_app/index.html', content)
 
     def post(self, request):
         kks_form = KksCodeForm(request.POST)
-        print(kks_form)
+        print(request.POST)
+        # print(kks_form)
         return redirect('index')
+
+
+def get_object_view(request):
+    """Функция получения списка объектов"""
+
 
