@@ -37,30 +37,33 @@ def get_objects(request):
 
 
 class GetSector2View(View):
+    """Сектор 2"""
+
     def post(self, request):
-        print('sector2')
-        print(request.POST)
-        kks_object_number = request.POST.get('kks_object_number')
+        print('Sector_2')
+        kks_object_number = request.POST.get('kks_object_number')  # id сектора 1
         print(kks_object_number)
         obj = KksObjectModel.objects.get(id=kks_object_number).kks_object_abr
+        # Получение этапов относящихся к объекту
         objects = KksStageObjectModel.objects.get_queryset().filter(kks_object_id=kks_object_number)
         content = {'objects': objects}
         resp = render(request, 'kks_reestr_app/ajax/sector_2.html', content)
-        resp.set_cookie(key='kks_sector1_text', value=obj)
-        resp.set_cookie(key='kks_sector1_id', value=kks_object_number)
+        # Устанавливаем cookies
+        resp.set_cookie(key='kks_sector1_text', value=obj)  # cookies: текст сектора 1
+        resp.set_cookie(key='kks_sector1_id', value=kks_object_number)  # cookies: id сектора 1
         return resp
+
 
 class GetSector3View(View):
     def post(self, request):
         print('sector3')
         print(request.POST)
         print(request.COOKIES['kks_sector1_id'])
-        kks_object_id = request.COOKIES['kks_sector1_id']
-        kks_stage_number = request.POST.get('kks_stage_number')
+        kks_object_id = request.COOKIES['kks_sector1_id']  # id сектора 1
+        kks_stage_number = request.POST.get('kks_stage_number')  # id сектора 2
         print(kks_stage_number)
         obj = KksStageObjectModel.objects.get(id=kks_stage_number).kks_stage.kks_stage_letter
         objects = KksOrganizationCodeObjectModel.objects.get_queryset().filter(kks_object_id=kks_object_id)
-        print(objects)
         content = {'objects': objects}
         resp = render(request, 'kks_reestr_app/ajax/sector_3.html', content)
         resp.set_cookie(key='kks_sector2_text', value=obj)
