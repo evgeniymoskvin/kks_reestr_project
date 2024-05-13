@@ -5,18 +5,100 @@
 {% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {% for obj in objects %}
-            <div>
-                <input class="input_kks" type="radio" name="kks_object_number" value="{{ obj.id }}" id="{{ obj.kks_object_abr }}" hidden>
-                <label for="{{ obj.kks_object_abr }}">{{ obj }}</label>
+    <div class="d-flex w-100 align-items-center justify-content-center" id="id_generator_body">
+        <div class="kks_content">
+            <div class="d-flex flex-column" id="id_title_start">
+                <div class="d-flex text-48px-bold">
+                    Код KKS
+                </div>
+                <div class="d-flex text-18px-light">
+                    Быстро, но не факт, что правильно
+                </div>
             </div>
-        {% endfor %}
-        <button class="btn btn-dark" type="submit"> Ok</button>
-    </form>
+            <div class="kks_pole" id="id_kks_pole">
+                <div class="kks_pole_inside_first">
+                    <div class="d-flex text-24px-light" id="sector_1">XXXX</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 54px">
+                    <div class="d-flex text-24px-light">X</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 91px">
+                    <div class="d-flex text-24px-light">XXX</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 54px">
+                    <div class="d-flex text-24px-light">X</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 150px">
+                    <div class="d-flex text-24px-light">XXXXXX</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 126px">
+                    <div class="d-flex text-24px-light">XXXXX</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 91px">
+                    <div class="d-flex text-24px-light">XXX</div>
+                </div>
+                <div class="kks_pole_inside" style="width: 73px">
+                    <div class="d-flex text-24px-light">XX</div>
+                </div>
+                <div class="kks_pole_inside_last">
+                    <div class="d-flex text-24px-light">XXXX</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                <button class="button_blue" style="width: 196px; height: 45px;" onclick="clickGenerateKKS()"
+                        id="id_button_generate">
+                    Создать код kks
+                </button>
+            </div>
+
+            <div class="d-flex" data-ajax-url="{% url 'get-objects' %}" id="id_inside_place">
+            </div>
+            <div class="d-flex" data-ajax-url="{% url 'get-sector-2' %}" id="id_inside_place_2">
+            </div>
+        </div>
+    </div>
+
+    {#    </div>#}
 {% endblock %}
 
 {% block script %}
+    <script>
 
+        function clickGenerateKKS() {
+            $('#id_generator_body').animate({opacity: 0}, 200)
+            $('#id_button_generate').animate({opacity: 0}, 200)
+            $('#id_inside_place').css('opacity: 0')
+            setTimeout(function () {
+                $('#id_button_generate').removeClass('d-flex')
+                $('#id_button_generate').addClass('d-none')
+                $('#id_title_start').removeClass('d-flex')
+                $('#id_title_start').addClass('d-none')
+                $('#id_generator_body').removeClass('align-items-center')
+                $('#id_generator_body').animate({opacity: 1, marginTop: 100}, 450)
+            }, 300)
+
+            var get_objects_url = $("#id_inside_place").attr("data-ajax-url");
+            console.log(get_objects_url)
+            setTimeout(function () {
+                $.ajax({                       // формируем AJAX запрос
+                    url: get_objects_url,                    // подгружаем URL адрес для запроса
+                    data: {
+                        'get_objects_url': get_objects_url    // добавляем objectID в query параметры GET запроса
+                    },
+                    success: function (data) {   // `data` результат выполнения  функции `load_contract`
+                        $("#id_inside_place").html(data)
+                        var id_inside_place_2_url = $("#id_inside_place_2").attr("data-ajax-url")
+                        console.log(id_inside_place_2_url)
+
+                    }
+                })
+            }, 400);
+
+        }
+
+
+
+
+
+    </script>
 {% endblock %}

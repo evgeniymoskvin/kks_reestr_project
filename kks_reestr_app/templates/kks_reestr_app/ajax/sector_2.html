@@ -1,0 +1,28 @@
+<div class="d-flex content-fade flex-column">
+    <div class="d-flex flex-column" id="id_title_start">
+        <div class="d-flex text-36px-bold" style="margin-top: 50px">
+            Сектор 2:
+        </div>
+        <div class="d-flex text-18px-light">
+            Выберите ''nfn''
+        </div>
+    </div>
+    <div class="d-flex">
+        <form method="POST" style="display: flex; flex-direction: column" id="id-objects-form"
+              action="{% url 'get-sector-2' %}">
+            {% csrf_token %}
+            {% for obj in objects %}
+                <div>
+                    <input class="input_kks" type="radio" name="kks_object_number" value="{{ obj.id }}"
+                           id="{{ obj.kks_object_abr }}" hidden>
+                    <label for="{{ obj.kks_object_abr }}">{{ obj }}</label>
+                </div>
+            {% endfor %}
+            <button class="btn btn-dark" type="submit"> Ok</button>
+        </form>
+    </div>
+</div>
+
+<script>
+
+</script>

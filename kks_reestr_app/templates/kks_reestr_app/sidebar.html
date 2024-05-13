@@ -1,0 +1,81 @@
+{% load static %}
+
+
+<div>
+
+    <nav class="main-menu">
+        <ul>
+            <li>
+                <a href="{% url 'index' %}" style="vertical-align: top">
+
+                    <i class="fa">
+                        <div class="icon-home"></div>
+                    </i>
+
+                    <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
+                           Главная страница
+                        </span>
+                </a>
+
+            </li>
+
+            <!-- Для руководителей-->
+{#            {% if user.right_to_sign == True and user.cpe_flag == False %}#}
+{#                {% include "todo_tasks/offcanvas/offcanvas_can_sign.html" %}#}
+{#            {% elif user.cpe_flag == True %}#}
+{#                {% include "todo_tasks/offcanvas/offcanvas_cpe.html" %}#}
+{#            {% else %}#}
+{#                {% include "todo_tasks/offcanvas/offcanvas_worker.html" %}#}
+{#            {% endif %}#}
+
+
+            <li>
+                <a href="">
+                    <i class="fa">
+                        <div class="icon-search-menu"></div>
+                    </i>
+                    <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
+                            Расширенный поиск
+                        </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <i class="fa">
+                        <div class="icon-favorites-menu"></div>
+                    </i>
+                    <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
+                           Избранное
+                        </span>
+                </a>
+            </li>
+        </ul>
+
+
+        <ul class="logout">
+            <li>
+                <a href="">
+                    <i class="fa">
+                        <div class="icon-user-menu"></div>
+                    </i>
+                    <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
+                            {{ user.last_name }} {{ user.first_name|slice:"0:1" }}.{{ user.middle_name|slice:"0:1" }}.
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa">
+                        <div class="icon-power-off-menu"></div>
+                    </i>
+                    <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
+                            Выйти
+                        </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <script type="text/javascript">
+    </script>
+</div>

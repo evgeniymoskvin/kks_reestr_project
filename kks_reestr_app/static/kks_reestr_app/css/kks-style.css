@@ -1,15 +1,187 @@
+@font-face {
+    font-family: 'Golos_400';
+    src: url('../fonts/golos/400/font.woff2') format('woff2'),
+    url('../fonts/golos/400/font.woff') format('woff'),
+    url('../fonts/golos/400/font.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Golos_500';
+    src: url('../fonts/golos/500/font.woff2') format('woff2'),
+    url('../fonts/golos/500/font.woff') format('woff'),
+    url('../fonts/golos/500/font.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Golos_700';
+    src: url('../fonts/golos/700/font.woff2') format('woff2'),
+    url('../fonts/golos/700/font.woff') format('woff'),
+    url('../fonts/golos/700/font.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Rosatom_light';
+    src: url('../fonts/rosatom/Rosatom-Light.woff2') format('woff2'),
+    url('../fonts/rosatom/Rosatom-Light.woff') format('woff'),
+    url('../fonts/rosatom/Rosatom-Light.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Rosatom_regular';
+    src: url('../fonts/rosatom/Rosatom-Regular.woff2') format('woff2'),
+    url('../fonts/rosatom/Rosatom-Regular.woff') format('woff'),
+    url('../fonts/rosatom/Rosatom-Regular.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Rosatom_bold';
+    src: url('../fonts/rosatom/Rosatom-Bold.woff2') format('woff2'),
+    url('../fonts/rosatom/Rosatom-Bold.woff') format('woff'),
+    url('../fonts/rosatom/Rosatom-Bold.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.text-48px-bold {
+    font-size: 48px;
+    font-family: "Rosatom_bold", serif;
+    color: #1D222A;
+}
+
+.text-36px-bold {
+    font-size: 36px;
+    font-family: "Rosatom_bold", serif;
+    color: #1D222A;
+}
+
+.text-24px-light {
+    font-size: 24px;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+}
+
+.text-18px-light {
+    font-size: 18px;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+}
+
 .input_kks {
     display: none;
 }
 
-.input_kks + label{
+.input_kks + label {
     color: red;
 }
 
-.input_kks:hover +label{
+.input_kks:hover + label {
     color: #0a53be;
 }
 
-.input_kks:checked +label{
+.input_kks:checked + label {
     color: green;
 }
+
+.content-fade {
+    scroll-behavior: smooth;
+    animation: fade-in 0.7s ease-in-out;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.kks_content {
+    display: flex;
+    flex-direction: column;
+    width: 855px;
+}
+
+.kks_pole {
+    display: flex;
+    flex-direction: row;
+    width: 855px;
+    height: 55px;
+    margin-top: 40px;
+
+}
+
+.kks_pole_inside_first {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 108px;
+    height: 55px;
+    border-left: 1px solid rgb(108, 172, 228);
+    border-top: 1px solid rgb(108, 172, 228);
+    border-bottom: 1px solid rgb(108, 172, 228);
+    border-radius: 10px 0 0 10px;
+}
+
+.kks_pole_inside {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 54px;
+    height: 55px;
+    border-left: 1px solid rgb(108, 172, 228);
+    border-top: 1px solid rgb(108, 172, 228);
+    border-bottom: 1px solid rgb(108, 172, 228);
+}
+
+.kks_pole_inside_last {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 108px;
+    height: 55px;
+    border: 1px solid rgb(108, 172, 228);
+    border-radius: 0 10px 10px 0;
+}
+
+.button_blue {
+    border: 0;
+    border-radius: 8px;
+    background-color: rgb(108, 172, 228);
+    font-size: 18px;
+    font-family: "Rosatom_regular", serif;
+    color: white;
+    transition-duration: .15s;
+}
+
+.button_blue:hover {
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+}
+
+.button_blue:active {
+    background: rgb(93, 148, 196);
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+
+}
+
