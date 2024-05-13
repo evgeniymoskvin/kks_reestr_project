@@ -67,5 +67,5 @@ class GetSector3View(View):
         content = {'objects': objects}
         resp = render(request, 'kks_reestr_app/ajax/sector_3.html', content)
         resp.set_cookie(key='kks_sector2_text', value=obj)
-        resp.set_cookie(key='kks_sector1_id', value=kks_stage_number)
+        resp.set_cookie(key='kks_sector2_id', value=kks_stage_number)
         return resp
