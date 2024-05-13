@@ -1,14 +1,14 @@
 <div class="d-flex content-fade flex-column w-100">
     <div class="d-flex flex-column">
         <div class="d-flex text-36px-bold" style="margin-top: 50px">
-            Сектор 1:
+            Сектор 3:
         </div>
         <div class="d-flex text-18px-light">
-            Выберите объект
+            Код организации
         </div>
     </div>
     <div class="d-flex flex-column w-100">
-        <form method="POST" class="d-flex flex-column mt-4" id="id-objects-form">
+        <form method="POST" class="d-flex flex-column mt-4" id="id-sector2-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
                     <div class="nav-prev-generator"></div>
@@ -18,9 +18,9 @@
                     {% csrf_token %}
                     {% for obj in objects %}
                         <div class="d-flex">
-                            <input class="input_kks" type="radio" name="kks_object_number" value="{{ obj.id }}"
-                                   id="{{ obj.kks_object_abr }}" hidden>
-                            <label for="{{ obj.kks_object_abr }}">{{ obj.kks_object_full_name }}</label>
+                            <input class="input_kks" type="radio" name="kks_stage_number" value="{{ obj.id }}"
+                                   id="{{ obj.kks_organization_code }}" hidden>
+                            <label for="{{ obj.kks_organization_code }}">{{ obj.kks_organization_code }}</label>
                         </div>
                     {% endfor %}
                 </div>
@@ -28,33 +28,31 @@
                 <div class="d-flex align-items-center">
                     <input class="nav-next-generator" type="submit">
                 </div>
-
-
             </div>
         </form>
     </div>
 </div>
 
 <script>
-    $('#id-objects-form').submit(function (e) {
+    $('#id-sector2-form').submit(function (e) {
         e.preventDefault()
 
         var form = $(this)
-        var id_inside_place_2_url = $("#id_inside_place_2").attr("data-ajax-url")
+        var id_inside_place_3_url = $("#id_inside_place_3").attr("data-ajax-url")
 
         $.ajax({
             type: "POST",
-            url: id_inside_place_2_url,
+            url: id_inside_place_3_url,
             data: form.serialize(),
             success: function (data) {
-                $('#id_inside_place').animate({opacity: 0}, 200)
-                $('#id_inside_place').removeClass('d-flex')
-                $('#id_inside_place').addClass('d-none')
-                $("#id_inside_place_2").html(data)
-                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector1_text') + '=([^;]+)') || []).pop() || null;
+                $('#id_inside_place_2').animate({opacity: 0}, 200)
+                $('#id_inside_place_2').removeClass('d-flex')
+                $('#id_inside_place_2').addClass('d-none')
+                $("#id_inside_place_3").html(data)
+                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector1') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
-                $('#sector_1').text(cookieObjectValue)
-                $('#sector_1').css({'color': '#1D222A'})
+                $('#sector_2').text(cookieObjectValue)
+                $('#sector_2').css({'color': '#1D222A'})
             }
         })
     })

@@ -177,6 +177,8 @@
 }
 
 .input_kks + label {
+    text-align: center;
+    align-items: center;
     min-height: 45px;
     max-width: 200px;
     font-size: 18px;

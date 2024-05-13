@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('/ajax/get-objects', views.get_objects, name='get-objects'),
-    path('/ajax/get-sector-2', views.GetSector2View.as_view(), name='get-sector-2')
+    path('/ajax/get-sector-2', views.GetSector2View.as_view(), name='get-sector-2'),
+    path('/ajax/get-sector-3', views.GetSector3View.as_view(), name='get-sector-3')
     # path('admin/', admin.site.urls),
 ]
