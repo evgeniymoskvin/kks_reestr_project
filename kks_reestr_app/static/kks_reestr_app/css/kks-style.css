@@ -246,3 +246,21 @@
     background-color: #1D222A;
 
 }
+
+.input_text {
+    width: 306px;
+    height: 45px;
+    padding: 12px 20px;
+    /*width: 100%;*/
+    border: 1px solid rgb(108, 172, 228);
+    border-radius: 8px;
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+    font-size: 18px;
+    font-family: "Rosatom_regular", serif;
+}
+
+
+
+/*.input_text:focus {*/
+/*    border: 2px solid rgb(108, 172, 228);*/
+/*}*/

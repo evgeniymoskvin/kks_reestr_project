@@ -38,17 +38,17 @@
         e.preventDefault()
 
         var form = $(this)
-        var id_inside_place_5_url = $("#id_inside_place_5").attr("data-ajax-url")
+        var id_inside_place_type_doc = $("#id_inside_place_type_doc").attr("data-ajax-url")
 
         $.ajax({
             type: "POST",
-            url: id_inside_place_5_url,
+            url: id_inside_place_type_doc,
             data: form.serialize(),
             success: function (data) {
                 $('#id_inside_place_4').animate({opacity: 0}, 200)
                 $('#id_inside_place_4').removeClass('d-flex')
                 $('#id_inside_place_4').addClass('d-none')
-                $("#id_inside_place_5").html(data)
+                $("#id_inside_place_type_doc").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector4_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
                 $('#sector_4').text(cookieObjectValue)

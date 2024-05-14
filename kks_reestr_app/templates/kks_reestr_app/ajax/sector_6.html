@@ -1,14 +1,14 @@
 <div class="d-flex content-fade flex-column w-100">
     <div class="d-flex flex-column">
         <div class="d-flex text-36px-bold" style="margin-top: 50px">
-            Сектор 5:
+            Сектор 4:
         </div>
         <div class="d-flex text-18px-light">
             Для какого типа документы, разрабатывается документация
         </div>
     </div>
     <div class="d-flex flex-column w-100">
-        <form method="POST" class="d-flex flex-column mt-4" id="id-sector3-form">
+        <form method="POST" class="d-flex flex-column mt-4" id="id-sector4-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
                     <div class="nav-prev-generator"></div>
@@ -38,18 +38,18 @@
         e.preventDefault()
 
         var form = $(this)
-        var id_inside_place_4_url = $("#id_inside_place_4").attr("data-ajax-url")
+        var id_inside_place_type_doc = $("#id_inside_place_type_doc").attr("data-ajax-url")
 
         $.ajax({
             type: "POST",
-            url: id_inside_place_4_url,
+            url: id_inside_place_type_doc,
             data: form.serialize(),
             success: function (data) {
                 $('#id_inside_place_4').animate({opacity: 0}, 200)
                 $('#id_inside_place_4').removeClass('d-flex')
                 $('#id_inside_place_4').addClass('d-none')
-                $("#id_inside_place_5").html(data)
-                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector1') + '=([^;]+)') || []).pop() || null;
+                $("#id_inside_place_type_doc").html(data)
+                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector4_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
                 $('#sector_4').text(cookieObjectValue)
                 $('#sector_4').css({'color': '#1D222A'})

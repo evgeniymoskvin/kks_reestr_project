@@ -251,7 +251,7 @@ class KksSector5Model(models.Model):
     """
     kks_sector5_value = models.CharField(verbose_name="Значение сектора 5", max_length=6,
                                          validators=[MinLengthValidator(6)],
-                                         help_text="6 символов")
+                                         help_text="6 символов", unique=True)
 
     class Meta:
         verbose_name = _("значение сектора 5")
