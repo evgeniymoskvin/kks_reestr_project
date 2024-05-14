@@ -11,7 +11,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 
-from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel, KksTypeBuildingModel
+from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel, \
+    KksTypeBuildingModel
 
 from .forms import KksCodeForm
 
@@ -30,7 +31,7 @@ class IndexView(View):
 def get_objects(request):
     print('Sector1')
     """Функция получения списка объектов"""
-    objects = KksObjectModel.objects.get_queryset().filter(kks_object_show=True)
+    objects = KksObjectModel.objects.get_queryset().filter(kks_object_show=True).order_by('kks_object_abr')
     content = {'objects': objects}
     print(objects)
     # content = {'kks_form': kks_form}
@@ -47,7 +48,8 @@ class GetSector2View(View):
         print(kks_object_number)
         obj = KksObjectModel.objects.get(id=kks_object_number).kks_object_abr
         # Получение этапов относящихся к объекту
-        objects = KksStageObjectModel.objects.get_queryset().filter(kks_object_id=kks_object_number)
+        objects = KksStageObjectModel.objects.get_queryset().filter(kks_object_id=kks_object_number).order_by(
+            'kks_stage__kks_stage_letter')
         content = {'objects': objects}
         resp = render(request, 'kks_reestr_app/ajax/sector_2.html', content)
         # Устанавливаем cookies
@@ -57,6 +59,8 @@ class GetSector2View(View):
 
 
 class GetSector3View(View):
+    """Сектор 3"""
+
     def post(self, request):
         print('sector3')
         print(request.POST)
@@ -72,7 +76,10 @@ class GetSector3View(View):
         resp.set_cookie(key='kks_sector2_id', value=kks_stage_number)
         return resp
 
+
 class GetSector4View(View):
+    """Сектор 4"""
+
     def post(self, request):
         print('sector4')
         print(request.POST)
@@ -80,10 +87,27 @@ class GetSector4View(View):
         kks_org_number_id = request.POST.get('kks_org_number')
         kks_object_id = request.COOKIES['kks_sector1_id']  # id сектора 1
         obj = KksOrganizationCodeObjectModel.objects.get(id=kks_org_number_id).kks_organization_code.kks_org_code
-        objects = KksTypeBuildingModel.objects.get_queryset().filter(kks_object_id=kks_object_id)
+        objects = KksTypeBuildingModel.objects.get_queryset().filter(kks_object_id=kks_object_id).order_by('kks_type_building_code')
         content = {'objects': objects}
         print(objects)
         resp = render(request, 'kks_reestr_app/ajax/sector_4.html', content)
         resp.set_cookie(key='kks_sector3_text', value=obj)
         resp.set_cookie(key='kks_sector3_id', value=kks_org_number_id)
+        return resp
+
+
+class GetSector5View(View):
+    def post(self, request):
+        print('sector5')
+        print(request.POST)
+        print(request.COOKIES['kks_sector1_id'])
+        kks_type_building_number_id = request.POST.get('kks_type_building_number')
+        kks_object_id = request.COOKIES['kks_sector1_id']  # id сектора 1
+        obj = KksTypeBuildingModel.objects.get(id=kks_type_building_number_id).kks_type_building_code
+        objects = KksTypeBuildingModel.objects.get_queryset().filter(kks_object_id=kks_object_id)
+        content = {'objects': objects}
+        print(objects)
+        resp = render(request, 'kks_reestr_app/ajax/sector_5.html', content)
+        resp.set_cookie(key='kks_sector4_text', value=obj)
+        resp.set_cookie(key='kks_sector4_id', value=kks_type_building_number_id)
         return resp

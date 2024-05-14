@@ -14,7 +14,7 @@
                     <div class="nav-prev-generator" onclick="onClickToSector1()"></div>
                 </div>
 
-                <div class="d-flex flex-row gap-3">
+                <div class="d-flex flex-row gap-3 flex-wrap justify-content-between">
                     {% csrf_token %}
                     {% for obj in objects %}
                         <div class="d-flex">
