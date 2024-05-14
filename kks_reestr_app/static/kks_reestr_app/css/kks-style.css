@@ -151,6 +151,7 @@
 }
 
 .button_blue {
+    min-width: 200px;
     border: 0;
     border-radius: 8px;
     background-color: rgb(108, 172, 228);
@@ -177,10 +178,12 @@
 }
 
 .input_kks + label {
+    cursor: pointer;
     text-align: center;
     align-items: center;
+    justify-content: center;
+    width: 200px;
     min-height: 45px;
-    max-width: 200px;
     font-size: 18px;
     font-family: "Rosatom_regular", serif;
     display: flex;
@@ -207,6 +210,7 @@
 
 .nav-prev-generator {
     display: flex;
+    cursor: pointer;
     -webkit-mask-image: url("../icons/left.svg");
     mask-image: url("../icons/left.svg");
     width: 47px;
@@ -217,6 +221,11 @@
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     transition-duration: .15s;
+}
+
+.nav-prev-generator:hover {
+    background-color: #1D222A;
+
 }
 
 .nav-next-generator {

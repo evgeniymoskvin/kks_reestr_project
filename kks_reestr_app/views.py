@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 
-from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel
+from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel, KksTypeBuildingModel
 
 from .forms import KksCodeForm
 
@@ -28,9 +28,11 @@ class IndexView(View):
 
 
 def get_objects(request):
+    print('Sector1')
     """Функция получения списка объектов"""
     objects = KksObjectModel.objects.get_queryset().filter(kks_object_show=True)
     content = {'objects': objects}
+    print(objects)
     # content = {'kks_form': kks_form}
     resp = render(request, 'kks_reestr_app/ajax/sector_1.html', content)
     return resp
@@ -68,4 +70,20 @@ class GetSector3View(View):
         resp = render(request, 'kks_reestr_app/ajax/sector_3.html', content)
         resp.set_cookie(key='kks_sector2_text', value=obj)
         resp.set_cookie(key='kks_sector2_id', value=kks_stage_number)
+        return resp
+
+class GetSector4View(View):
+    def post(self, request):
+        print('sector4')
+        print(request.POST)
+        print(request.COOKIES['kks_sector1_id'])
+        kks_org_number_id = request.POST.get('kks_org_number')
+        kks_object_id = request.COOKIES['kks_sector1_id']  # id сектора 1
+        obj = KksOrganizationCodeObjectModel.objects.get(id=kks_org_number_id).kks_organization_code.kks_org_code
+        objects = KksTypeBuildingModel.objects.get_queryset().filter(kks_object_id=kks_object_id)
+        content = {'objects': objects}
+        print(objects)
+        resp = render(request, 'kks_reestr_app/ajax/sector_4.html', content)
+        resp.set_cookie(key='kks_sector3_text', value=obj)
+        resp.set_cookie(key='kks_sector3_id', value=kks_org_number_id)
         return resp

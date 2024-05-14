@@ -51,6 +51,8 @@
                 $('#id_inside_place').removeClass('d-flex')
                 $('#id_inside_place').addClass('d-none')
                 $("#id_inside_place_2").html(data)
+                $('#id_inside_place_2').removeClass('d-none')
+                $('#id_inside_place_2').addClass('d-flex')
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector1_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
                 $('#sector_1').text(cookieObjectValue)
