@@ -1,0 +1,102 @@
+<div class="d-flex content-fade flex-column w-100">
+    <div class="d-flex flex-column">
+        <div class="d-flex text-36px-bold" style="margin-top: 50px">
+            Сектор 6:
+        </div>
+        <div class="d-flex text-18px-light">
+            Заполните поля согласно инструкции
+        </div>
+    </div>
+    <div class="d-flex flex-column w-100">
+        <form method="POST" class="d-flex flex-column mt-4" id="id-sector6-form">
+            <div class="d-flex flex-row justify-content-between gap-3">
+                <div class="d-flex align-items-center">
+                    <div class="nav-prev-generator"></div>
+                </div>
+
+                <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
+                    {% csrf_token %}
+                    {% if kks_type_doc_id == 0 or kks_type_doc_id == 1 %}
+                        <div class="d-flex">
+                            <input class="input_text" type="text" id="input_sector6_txt1" name="input_sector6_txt1"
+                                   required minlength="2"
+                                   maxlength="2" placeholder="Код номера книги">
+                        </div>
+                        <div class="d-flex">
+                            <input class="input_text" type="text" id="input_sector6_txt2" name="input_sector6_txt2"
+                                   required minlength="2"
+                                   maxlength="2" placeholder="Код номера части">
+                        </div>
+                        <div class="d-flex">
+                            <input class="input_text" type="text" id="input_sector6_txt3" name="input_sector6_txt3"
+                                   required
+                                   minlength="1"
+                                   maxlength="1" value="&" disabled
+                                   data-toggle="tooltip" data-bs-placement="bottom"
+                                   rel="txtTooltip" data-bs-html="true"
+                                   title="Для ОБИН и ПООБ данное поле не заполняется">
+                        </div>
+                    {% else %}
+                        <div>
+                            <input class="input_text" type="text" id="input_sector6_txt1" name="input_sector6_txt1"
+                                   required minlength="2"
+                                   maxlength="2" placeholder="Код номера темы">
+                        </div>
+                        <div class="d-flex">
+                            <input class="input_text" type="text" id="input_sector6_txt2" name="input_sector6_txt2"
+                                   required minlength="2"
+                                   maxlength="2" placeholder="Код номера книги">
+                        </div>
+                        <div class="d-flex">
+                            <input class="input_text" type="text" id="input_sector6_txt3" name="input_sector6_txt3"
+                                   required
+                                   minlength="1"
+                                   maxlength="1" placeholder="Код приложения">
+                        </div>
+                    {% endif %}
+
+
+                    <div class="d-flex">
+                        <input class="input_text" type="text"
+                               minlength="2"
+                               maxlength="2" style="opacity: 0" disabled>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <input class="nav-next-generator" type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $('#id-sector6-form').submit(function (e) {
+        e.preventDefault()
+
+        var form = $(this)
+        var id_inside_place_7 = $("#id_inside_place_7").attr("data-ajax-url")
+
+        $.ajax({
+            type: "POST",
+            url: id_inside_place_7,
+            data: form.serialize(),
+            success: function (data) {
+                $('#id_inside_place_6').animate({opacity: 0}, 200)
+                $('#id_inside_place_6').removeClass('d-flex')
+                $('#id_inside_place_6').addClass('d-none')
+                $("#id_inside_place_7").html(data)
+                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector6_text') + '=([^;]+)') || []).pop() || null;
+                console.log(cookieObjectValue)
+                $('#sector_6').text(cookieObjectValue)
+                $('#sector_6').css({'color': '#1D222A'})
+            }
+        })
+    })
+</script>

@@ -27,5 +27,8 @@ urlpatterns = [
     path('/ajax/get-type-doc', views.GetTypeDocView.as_view(), name='get-type-doc'),
     path('/ajax/get-sector-5', views.GetSector5View.as_view(), name='get-sector-5'),
     path('/ajax/get-sector-6', views.GetSector6View.as_view(), name='get-sector-6'),
+    path('/ajax/get-sector-6-1', views.GetSector61View.as_view(), name='get-sector-6-1'),
+    path('/ajax/get-sector-7', views.GetSector7View.as_view(), name='get-sector-7'),
+    path('/ajax/get-sector-8', views.GetSector8View.as_view(), name='get-sector-8'),
     # path('admin/', admin.site.urls),
 ]

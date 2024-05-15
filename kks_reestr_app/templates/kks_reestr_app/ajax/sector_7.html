@@ -1,0 +1,72 @@
+<div class="d-flex content-fade flex-column w-100">
+    <div class="d-flex flex-column">
+        <div class="d-flex text-36px-bold" style="margin-top: 50px">
+            Сектор 7:
+        </div>
+        <div class="d-flex text-18px-light">
+            Выберите техническую специальность
+        </div>
+    </div>
+    <div class="d-flex flex-column w-100">
+        <form method="POST" class="d-flex flex-column mt-4" id="id-sector7-form">
+            <div class="d-flex flex-row justify-content-between gap-3">
+                <div class="d-flex align-items-center">
+                    <div class="nav-prev-generator"></div>
+                </div>
+
+                <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
+                    {% csrf_token %}
+                    <div class="d-flex">
+                        <select class="form-select" style="width: 100%" name="kks_tech_speciality_id"
+                                id="kks_tech_speciality_id">
+                            <option selected>Техническая специальность</option>
+                            {% for obj in objects %}
+                                <option value="{{ obj.id }}">{{ obj }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <input class="nav-next-generator" type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+
+        //$('#kks_tech_speciality_id').select2({
+          //  placeholder: 'Техническая специальность',
+        //});
+
+    });
+
+    $('#id-sector7-form').submit(function (e) {
+        e.preventDefault()
+
+        var form = $(this)
+        var id_inside_place_8 = $("#id_inside_place_8").attr("data-ajax-url")
+
+        $.ajax({
+            type: "POST",
+            url: id_inside_place_8,
+            data: form.serialize(),
+            success: function (data) {
+                $('#id_inside_place_7').animate({opacity: 0}, 200)
+                $('#id_inside_place_7').removeClass('d-flex')
+                $('#id_inside_place_7').addClass('d-none')
+                $("#id_inside_place_8").html(data)
+                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector7_text') + '=([^;]+)') || []).pop() || null;
+                console.log(cookieObjectValue)
+                $('#sector_7').text(cookieObjectValue)
+                $('#sector_7').css({'color': '#1D222A'})
+            }
+        })
+    })
+</script>

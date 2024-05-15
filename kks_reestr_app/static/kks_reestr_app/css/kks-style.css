@@ -259,7 +259,17 @@
     font-family: "Rosatom_regular", serif;
 }
 
+.input_text:disabled {
+    border: 1px solid rgb(176, 181, 185);
+    box-shadow: 2px 4px 11px -3px rgba(149, 150, 150, 0.45);
+    color: grey;
+}
 
+.input_text[type="text"]:disabled {
+    border: 1px solid rgb(176, 181, 185);
+    box-shadow: 2px 4px 11px -3px rgba(149, 150, 150, 0.45);
+    color: grey;
+}
 
 /*.input_text:focus {*/
 /*    border: 2px solid rgb(108, 172, 228);*/

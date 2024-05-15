@@ -267,7 +267,7 @@ class KksSector6Model(models.Model):
     """
     kks_sector6_value = models.CharField(verbose_name="Значение сектора 5", max_length=5,
                                          validators=[MinLengthValidator(5)],
-                                         help_text="Максимум 5 символов")
+                                         help_text="Максимум 5 символов", unique=True)
 
     class Meta:
         verbose_name = _("значение сектора 6")
@@ -421,6 +421,23 @@ class KksExecutionConstructionModel(models.Model):
 
     def __str__(self):
         return f'{self.kks_exec_construction} - {self.kks_exec_construction_description}'
+
+
+class KKSThematicDirectionModel(models.Model):
+    kks_thematic_direction_abr = models.CharField(verbose_name='Код тематического направления работы',
+                                                  help_text='По таблице приложения Д',
+                                                  max_length=3,
+                                                  validators=[MinLengthValidator(3)],
+                                                  )
+    kks_thematic_direction_description = models.CharField(verbose_name='Описание кода', max_length=250, null=False,
+                                                          blank=True)
+    kks_thematic_direction_visible = models.BooleanField(verbose_name='Видимость', default=True)
+    class Meta:
+        verbose_name = _('kks код тематического направления работы')
+        verbose_name_plural = _("kks коды тематических направлений работы")
+
+    def __str__(self):
+        return f'{self.kks_thematic_direction_abr} - {self.kks_thematic_direction_description}'
 
 
 class KksCodeModel(models.Model):

@@ -3,7 +3,7 @@ from kks_reestr_app.models import EmployeeModel, MoreDetailsEmployeeModel, KksCo
     KksTechnicalSpecialtyModel, KksOrganizationCodeObjectModel, KksTypeBuildingModel, KksTypeDocument, KksSector5Model, \
     KksStageObjectModel, KksCodeSystemModel, KksObjectModel, KksOrganizationCodeModel, KksStageModel, KksBuildingModel, \
     KksHighMarkModel, KksChangesHistoryModel, KksTypeConstructionModel, KksExecutionConstructionModel, \
-    KksCodeSystemOrganizationModel
+    KksCodeSystemOrganizationModel, KKSThematicDirectionModel
 
 
 class EmployeeAdmin(admin.ModelAdmin):
@@ -107,6 +107,11 @@ class KksCodeAdmin(admin.ModelAdmin):
                      ]
     list_filter = ('object__kks_object_abr', 'organization__kks_organization_code__kks_org_code')
 
+class KKSThematicDirectionAdmin(admin.ModelAdmin):
+    search_fields = ['kks_thematic_direction_abr', 'kks_thematic_direction_description']
+    ordering = ['kks_thematic_direction_abr']
+
+
 
 # admin.site.register(EmployeeModel, EmployeeAdmin)
 # admin.site.register(EmployeeModel)
@@ -129,6 +134,7 @@ admin.site.register(KksBuildingModel, KksBuildingAdmin)
 admin.site.register(KksHighMarkModel, KksHighMarkAdmin)
 admin.site.register(KksChangesHistoryModel, KksChangesHistoryAdmin)
 admin.site.register(KksTypeConstructionModel, KksTypeConstructionAdmin)
+admin.site.register(KKSThematicDirectionModel, KKSThematicDirectionAdmin)
 
 # admin.site.register(MoreDetailsEmployeeModel)
 # admin.site.register(GroupDepartmentModel, GroupDepartmentAdmin)

@@ -1,0 +1,78 @@
+<div class="d-flex content-fade flex-column w-100">
+    <div class="d-flex flex-column">
+        <div class="d-flex text-36px-bold" style="margin-top: 50px">
+            Сектор 6:
+        </div>
+        <div class="d-flex text-18px-light">
+            Заполните принадлежность документа к функциональной системе
+        </div>
+    </div>
+    <div class="d-flex flex-column w-100">
+        <form method="POST" class="d-flex flex-column mt-4" id="id-sector6-form">
+            <div class="d-flex flex-row justify-content-between gap-3">
+                <div class="d-flex align-items-center">
+                    <div class="nav-prev-generator"></div>
+                </div>
+
+                <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
+                    {% csrf_token %}
+                    <div class="d-flex">
+                        <select class="form-select" style="min-width: 300px" name="kks_code_system_id"
+                                id="kks_code_system_id">
+                            <option selected>Функционально-технологическая система</option>
+                            {% for obj in objects %}
+                                <option value="{{ obj.id }}">{{ obj }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="d-flex">
+                        <input class="form-control" style="max-width: 100px" type="text" id="input_sector6_txt1"
+                               name="input_sector6_txt1"
+                               required minlength="2"
+                               maxlength="2" placeholder="XX"
+                               data-toggle="tooltip" data-bs-placement="bottom"
+                               rel="txtTooltip" data-bs-html="true"
+                               title="Системная нумерация функционального кода KKS">
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <input class="nav-next-generator" type="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $('#id-sector6-form').submit(function (e) {
+        e.preventDefault()
+
+        var form = $(this)
+        var id_inside_place_7 = $("#id_inside_place_7").attr("data-ajax-url")
+
+        $.ajax({
+            type: "POST",
+            url: id_inside_place_7,
+            data: form.serialize(),
+            success: function (data) {
+                $('#id_inside_place_6').animate({opacity: 0}, 200)
+                $('#id_inside_place_6').removeClass('d-flex')
+                $('#id_inside_place_6').addClass('d-none')
+                $('#id_inside_place_6_1').animate({opacity: 0}, 200)
+                $('#id_inside_place_6_1').removeClass('d-flex')
+                $('#id_inside_place_6_1').addClass('d-none')
+                $("#id_inside_place_7").html(data)
+                var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector6_text') + '=([^;]+)') || []).pop() || null;
+                console.log(cookieObjectValue)
+                $('#sector_6').text(cookieObjectValue)
+                $('#sector_6').css({'color': '#1D222A'})
+            }
+        })
+    })
+</script>
