@@ -367,3 +367,27 @@
 /*.input_text:focus {*/
 /*    border: 2px solid rgb(108, 172, 228);*/
 /*}*/
+
+.tr-tables {
+    transition: 0.05s ease-in-out;
+}
+
+.tr-tables:hover {
+    background-color: rgba(2, 94, 161, 0.15);
+    /*color: white;*/
+}
+
+.tr-tables:hover td {
+    color: black;
+}
+
+
+.th_tables {
+    font-family: "Rosatom_regular", serif;
+    font-size: 16px;
+}
+
+.td_tables {
+    font-family: "Rosatom_regular", serif;
+    font-size: 15px;
+}

@@ -32,5 +32,7 @@ urlpatterns = [
     path('ajax/get-sector-8', views.GetSector8View.as_view(), name='get-sector-8'),
     path('ajax/get-sector-9', views.GetSector9View.as_view(), name='get-sector-9'),
     path('ajax/approve-save', views.ApproveSaveCodeView.as_view(), name='approve-save'),
+    path('all-kks', views.GetAllKksCodeView.as_view(), name='all-kks'),
+    path('my-kks', views.GetMyKksCodeView.as_view(), name='my-kks')
     # path('admin/', admin.site.urls),
 ]

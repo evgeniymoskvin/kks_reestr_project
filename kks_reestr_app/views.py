@@ -24,12 +24,9 @@ class IndexView(View):
 
     @method_decorator(login_required(login_url='login'))
     def get(self, request):
-        user = EmployeeModel.objects.get(user=request.user)
         content = {
-            'user': user,
         }
         resp = render(request, 'kks_reestr_app/index.html', content)
-        resp.set_cookie(key='user_id', value=user.id)
         return resp
 
 
@@ -407,9 +404,7 @@ class ApproveSaveCodeView(View):
         )
         new_kks_code.save()
         print(new_kks_code)
-        user = EmployeeModel.objects.get(user=request.user)
         content = {
-            'user': user,
         }
         resp = render(request, 'kks_reestr_app/index.html', content)  # Страница переадресации
         # Чистим cookies
@@ -423,3 +418,18 @@ class ApproveSaveCodeView(View):
         for i in cookies_list:
             resp.delete_cookie(i)
         return resp
+
+
+class GetAllKksCodeView(View):
+    def get(self, request):
+        objects = KksCodeModel.objects.get_queryset().order_by('-id')
+        content = {"objects": objects}
+        return render(request, 'kks_reestr_app/all-kks-codes.html', content)
+
+
+class GetMyKksCodeView(View):
+    def get(self, request):
+        user = EmployeeModel.objects.get(user=request.user)
+        objects = KksCodeModel.objects.get_queryset().filter(author_id=user.id).order_by('-id')
+        content = {"objects": objects}
+        return render(request, 'kks_reestr_app/my-kks-codes.html', content)
