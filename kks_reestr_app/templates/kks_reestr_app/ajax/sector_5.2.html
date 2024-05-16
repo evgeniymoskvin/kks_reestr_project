@@ -44,6 +44,21 @@
 </div>
 
 <script>
+
+    $(function () {
+        // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('#kks_building').select2({
+            placeholder: 'Здание',
+        });
+
+        $('#kks_high').select2({
+            placeholder: 'Высотная отметка',
+        });
+
+    });
+
     $('#id-sector5-form').submit(function (e) {
         e.preventDefault()
 

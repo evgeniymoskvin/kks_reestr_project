@@ -14,7 +14,7 @@ from django.http import HttpResponse
 from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel, \
     KksTypeBuildingModel, KksBuildingModel, KksHighMarkModel, KksSector5Model, KksCodeSystemModel, \
     KKSThematicDirectionModel, KksTypeConstructionModel, KksExecutionConstructionModel, KksSector6Model, \
-    KksTechnicalSpecialtyModel
+    KksTechnicalSpecialtyModel, KksTypeDocument
 
 from .forms import KksCodeForm
 
@@ -244,20 +244,21 @@ class GetSector7View(View):
         kks_type_doc_id = int(request.COOKIES['kks_type_doc'])
         kks_building_construction = int(request.COOKIES['kks_building_construction'])
         if kks_type_doc_id == 0 or kks_type_doc_id == 1 or kks_type_doc_id == 2 or kks_type_doc_id == 3:
+            # Если ОБИН, ПООБ, Предпроектная документация или Том проектной документации
             input_sector6_txt1 = request.POST.get('input_sector6_txt1')
             input_sector6_txt2 = request.POST.get('input_sector6_txt2')
             input_sector6_txt3 = request.POST.get('input_sector6_txt3')
             if input_sector6_txt3 is None:
                 input_sector6_txt3 = '&'
             result = f'{input_sector6_txt1}{input_sector6_txt2}{input_sector6_txt3}'
-            print(result)
         elif kks_type_doc_id == 7:
+            # Если НИР и ОКР
             kks_thematic_direction_id = int(request.POST.get('kks_thematic_direction_id'))
             kks_thematic_direction_text = KKSThematicDirectionModel.objects.get(
                 id=kks_thematic_direction_id).kks_thematic_direction_abr
             result = f'{kks_thematic_direction_text}&&'
-            print(result)
         else:
+            # В остальных случаях: Структурная единица проектной документации, РД, Конструкторская документация
             if kks_building_construction == 1:  # Если конструкция строительная
                 kks_types_construction_id = request.POST.get('kks_types_construction_id')  # id типа конструкции
                 kks_execution_construction_id = request.POST.get(
@@ -267,15 +268,14 @@ class GetSector7View(View):
                 kks_execution_construction_text = KksExecutionConstructionModel.objects.get(
                     id=kks_execution_construction_id).kks_exec_construction
                 result = f'&&&{kks_types_construction_text}{kks_execution_construction_text}'
-                print(result)
             else:
                 kks_code_system_id = int(request.POST.get('kks_code_system_id'))  # id кода системы
                 input_sector6_txt1 = request.POST.get(
                     'input_sector6_txt1')  # системная нумерация функционального кода KKS
                 kks_code_system_text = KksCodeSystemModel.objects.get(id=kks_code_system_id).kks_system_abr
                 result = f'{kks_code_system_text}{input_sector6_txt1}'
-                print(result)
-        sector_6_id, created = KksSector6Model.objects.get_or_create(kks_sector6_value=f'{result}')
+        sector_6_id, created = KksSector6Model.objects.get_or_create(
+            kks_sector6_value=f'{result}')  # Создаем запись в таблице секторов 6
         print(f'Sector 6: value = {sector_6_id}, id = {sector_6_id.id}')
         objects = KksTechnicalSpecialtyModel.objects.get_queryset().filter(kks_tech_speciality_show=True).order_by(
             'kks_tech_speciality')
@@ -290,6 +290,14 @@ class GetSector8View(View):
     """Сектор 8"""
 
     def post(self, request):
-        print('Sector7')
+        print('Sector8')
         print(f'REQUEST: {request.POST}')
         print(f'COOKIES: {request.COOKIES}')
+        kks_tech_speciality_id = int(request.POST.get('kks_tech_speciality_id'))
+        kks_tech_speciality_text = KksTechnicalSpecialtyModel.objects.get(id=kks_tech_speciality_id).kks_tech_speciality
+        objects = KksTypeDocument.objects.get_queryset().order_by('kks_type_doc')
+        content = {'objects': objects}
+        resp = render(request, 'kks_reestr_app/ajax/sector_8.html', content)
+        resp.set_cookie(key='kks_sector7_id', value=kks_tech_speciality_id)
+        resp.set_cookie(key='kks_sector7_text', value=kks_tech_speciality_text)
+        return resp
