@@ -14,9 +14,7 @@ from django.http import HttpResponse
 from .models import KksCodeModel, KksObjectModel, KksStageObjectModel, KksOrganizationCodeObjectModel, \
     KksTypeBuildingModel, KksBuildingModel, KksHighMarkModel, KksSector5Model, KksCodeSystemModel, \
     KKSThematicDirectionModel, KksTypeConstructionModel, KksExecutionConstructionModel, KksSector6Model, \
-    KksTechnicalSpecialtyModel, KksTypeDocument
-
-from .forms import KksCodeForm
+    KksTechnicalSpecialtyModel, KksTypeDocument, EmployeeModel
 
 
 class IndexView(View):
@@ -24,12 +22,18 @@ class IndexView(View):
     Главная страница проекта
     """
 
+    @method_decorator(login_required(login_url='login'))
     def get(self, request):
-        content = {}
+        user = EmployeeModel.objects.get(user=request.user)
+        content = {
+            'user': user,
+        }
         resp = render(request, 'kks_reestr_app/index.html', content)
+        resp.set_cookie(key='user_id', value=user.id)
         return resp
 
 
+@method_decorator(login_required(login_url='login'))
 def get_objects(request):
     """Функция получения списка объектов"""
     print('Sector1')
@@ -326,11 +330,12 @@ class GetSector9View(View):
             stage_id=kks_sector2_id).filter(organization_id=kks_sector3_id).filter(
             type_building_id=kks_sector4_id).filter(sector5_id=kks_sector5_id).filter(sector6_id=kks_sector6_id).filter(
             tech_speciality_id=kks_sector7_id).filter(type_doc_id=kks_sector8_id)
+        # Присваиваем порядковый номер
         if len(kks_code_queryset) == 0:
             index_number = 1
         else:
             index_number = len(kks_code_queryset) + 1
-
+        # Текстовая строка для сектора 9
         index_number_str = str(index_number).rjust(4, '0')
 
         content = {'kks_sector1_text': request.COOKIES['kks_sector1_text'],
@@ -346,5 +351,75 @@ class GetSector9View(View):
         resp.set_cookie(key='kks_sector8_id', value=kks_type_document_id)
         resp.set_cookie(key='kks_sector8_text', value=kks_type_document_text)
         resp.set_cookie(key='kks_sector9_text', value=index_number_str)
+        return resp
 
+
+class ApproveSaveCodeView(View):
+    @method_decorator(login_required(login_url='login'))
+    def post(self, request):
+        print('Sector9')
+        print(f'REQUEST: {request.POST}')
+        print(f'COOKIES: {request.COOKIES}')
+        # Получение всех данных из cookies
+        kks_sector1_id = int(request.COOKIES['kks_sector1_id'])
+        kks_sector1_text = request.COOKIES['kks_sector1_text']
+        kks_sector2_id = int(request.COOKIES['kks_sector2_id'])
+        kks_sector2_text = request.COOKIES['kks_sector2_text']
+        kks_sector3_id = int(request.COOKIES['kks_sector3_id'])
+        kks_sector3_text = request.COOKIES['kks_sector3_text']
+        kks_sector4_id = int(request.COOKIES['kks_sector4_id'])
+        kks_sector4_text = request.COOKIES['kks_sector4_text']
+        kks_sector5_id = int(request.COOKIES['kks_sector5_id'])
+        kks_sector5_text = request.COOKIES['kks_sector5_text']
+        kks_sector6_id = int(request.COOKIES['kks_sector6_id'])
+        kks_sector6_text = request.COOKIES['kks_sector6_text']
+        kks_sector7_id = int(request.COOKIES['kks_sector7_id'])
+        kks_sector7_text = request.COOKIES['kks_sector7_text']
+        kks_sector8_id = int(request.COOKIES['kks_sector8_id'])
+        kks_sector8_text = request.COOKIES['kks_sector8_text']
+        # Фильтруем из таблицы кодов по id
+        kks_code_queryset = KksCodeModel.objects.get_queryset().filter(object_id=kks_sector1_id).filter(
+            stage_id=kks_sector2_id).filter(organization_id=kks_sector3_id).filter(
+            type_building_id=kks_sector4_id).filter(sector5_id=kks_sector5_id).filter(sector6_id=kks_sector6_id).filter(
+            tech_speciality_id=kks_sector7_id).filter(type_doc_id=kks_sector8_id)
+        # Присваиваем порядковый номер
+        if len(kks_code_queryset) == 0:
+            index_number = 1
+        else:
+            index_number = len(kks_code_queryset) + 1
+        # Текстовая строка для сектора 9
+        kks_sector9_text = str(index_number).rjust(4, '0')
+        # Текстовая строка кода целиком
+        text_kks_code = f'{kks_sector1_text}.{kks_sector2_text}.{kks_sector3_text}.{kks_sector4_text}.{kks_sector5_text}.{kks_sector6_text}.{kks_sector7_text}.{kks_sector8_text}.{kks_sector9_text}'
+        # Создаем новую запись с кодом
+        new_kks_code = KksCodeModel(
+            object_id=kks_sector1_id,
+            stage_id=kks_sector2_id,
+            organization_id=kks_sector3_id,
+            type_building_id=kks_sector4_id,
+            sector5_id=kks_sector5_id,
+            sector6_id=kks_sector6_id,
+            tech_speciality_id=kks_sector7_id,
+            type_doc_id=kks_sector8_id,
+            index_number=index_number,
+            author_id=EmployeeModel.objects.get(user=request.user).id,
+            text=text_kks_code,
+        )
+        new_kks_code.save()
+        print(new_kks_code)
+        user = EmployeeModel.objects.get(user=request.user)
+        content = {
+            'user': user,
+        }
+        resp = render(request, 'kks_reestr_app/index.html', content)  # Страница переадресации
+        # Чистим cookies
+        cookies_list = ['kks_sector1_text', 'kks_sector2_text', 'kks_sector3_text', 'kks_sector4_text',
+                        'kks_sector5_text', 'kks_sector6_text', 'kks_sector7_text', 'kks_sector8_text',
+                        'kks_sector9_text',
+                        'kks_sector1_id', 'kks_sector2_id', 'kks_sector3_id', 'kks_sector4_id', 'kks_sector5_id',
+                        'kks_sector6_id', 'kks_sector7_id', 'kks_sector8_id',
+                        'kks_building_construction',
+                        'kks_type_doc']
+        for i in cookies_list:
+            resp.delete_cookie(i)
         return resp

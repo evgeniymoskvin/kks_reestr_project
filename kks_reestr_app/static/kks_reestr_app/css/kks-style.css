@@ -207,6 +207,63 @@
 
 }
 
+.button_blue_modal {
+    min-width: 200px;
+    min-height: 25px;
+    padding: 8px;
+    border: 1px solid rgb(108, 172, 228);
+    border-radius: 8px;
+    background-color: rgb(108, 172, 228);
+    font-size: 16px;
+    font-family: "Rosatom_light", serif;
+    color: white;
+    transition-duration: .15s;
+}
+
+.button_blue_modal:hover {
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+}
+
+.button_blue_modal:active {
+    background: rgb(93, 148, 196);
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+
+}
+
+.button_blue_modal_outline {
+    background: white;
+    padding: 8px;
+    min-height: 25px;
+    border: 1px solid rgb(108, 172, 228);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+    transition-duration: .15s;
+}
+
+.button_blue_modal_outline:hover {
+    box-shadow: 2px 4px 11px -3px rgba(2, 94, 161, 0.45);
+}
+
+
+.button_grey_modal_outline {
+    background: white;
+    padding: 8px;
+    min-height: 25px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+    transition-duration: .15s;
+}
+
+.button_grey_modal_outline:hover {
+    box-shadow: 2px 4px 11px -3px;
+}
+
+
 
 .input_kks {
     display: none;

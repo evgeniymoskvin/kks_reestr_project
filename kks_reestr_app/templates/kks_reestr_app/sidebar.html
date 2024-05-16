@@ -19,15 +19,6 @@
 
             </li>
 
-            <!-- Для руководителей-->
-{#            {% if user.right_to_sign == True and user.cpe_flag == False %}#}
-{#                {% include "todo_tasks/offcanvas/offcanvas_can_sign.html" %}#}
-{#            {% elif user.cpe_flag == True %}#}
-{#                {% include "todo_tasks/offcanvas/offcanvas_cpe.html" %}#}
-{#            {% else %}#}
-{#                {% include "todo_tasks/offcanvas/offcanvas_worker.html" %}#}
-{#            {% endif %}#}
-
 
             <li>
                 <a href="">
@@ -35,7 +26,7 @@
                         <div class="icon-search-menu"></div>
                     </i>
                     <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
-                            Расширенный поиск
+                            Мои коды
                         </span>
                 </a>
             </li>
@@ -46,7 +37,7 @@
                         <div class="icon-favorites-menu"></div>
                     </i>
                     <span class="nav-text text-menu-sidebar" style="text-transform: uppercase">
-                           Избранное
+                           Все коды
                         </span>
                 </a>
             </li>
@@ -65,7 +56,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url 'logout' %}">
                     <i class="fa">
                         <div class="icon-power-off-menu"></div>
                     </i>

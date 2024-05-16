@@ -470,7 +470,7 @@ class KksCodeModel(models.Model):
     author = models.ForeignKey(EmployeeModel, verbose_name='Кто взял номер', on_delete=models.PROTECT, default=None,
                                null=True)
     status = models.IntegerField(verbose_name="Статус номера", choices=StatusKksChoice.choices, default=1)
-    text = models.CharField(verbose_name='Kks код', max_length=37)
+    text = models.CharField(verbose_name='Kks код', max_length=37, unique=True)
     add_date = models.DateTimeField('Дата создания', auto_now_add=True, null=True)
 
     class Meta:
