@@ -30,5 +30,6 @@ urlpatterns = [
     path('/ajax/get-sector-6-1', views.GetSector61View.as_view(), name='get-sector-6-1'),
     path('/ajax/get-sector-7', views.GetSector7View.as_view(), name='get-sector-7'),
     path('/ajax/get-sector-8', views.GetSector8View.as_view(), name='get-sector-8'),
+    path('/ajax/get-sector-9', views.GetSector9View.as_view(), name='get-sector-9'),
     # path('admin/', admin.site.urls),
 ]

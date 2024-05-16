@@ -301,3 +301,50 @@ class GetSector8View(View):
         resp.set_cookie(key='kks_sector7_id', value=kks_tech_speciality_id)
         resp.set_cookie(key='kks_sector7_text', value=kks_tech_speciality_text)
         return resp
+
+
+class GetSector9View(View):
+    """Сектор 9"""
+
+    def post(self, request):
+        print('Sector9')
+        print(f'REQUEST: {request.POST}')
+        print(f'COOKIES: {request.COOKIES}')
+        kks_type_document_id = int(request.POST.get('kks_type_document_id'))
+        kks_type_document_text = KksTypeDocument.objects.get(id=kks_type_document_id).kks_type_doc
+        # Получение id каждого сектора из cookies
+        kks_sector1_id = int(request.COOKIES['kks_sector1_id'])
+        kks_sector2_id = int(request.COOKIES['kks_sector2_id'])
+        kks_sector3_id = int(request.COOKIES['kks_sector3_id'])
+        kks_sector4_id = int(request.COOKIES['kks_sector4_id'])
+        kks_sector5_id = int(request.COOKIES['kks_sector5_id'])
+        kks_sector6_id = int(request.COOKIES['kks_sector6_id'])
+        kks_sector7_id = int(request.COOKIES['kks_sector7_id'])
+        kks_sector8_id = kks_type_document_id
+        # Фильтруем из таблицы кодов по id
+        kks_code_queryset = KksCodeModel.objects.get_queryset().filter(object_id=kks_sector1_id).filter(
+            stage_id=kks_sector2_id).filter(organization_id=kks_sector3_id).filter(
+            type_building_id=kks_sector4_id).filter(sector5_id=kks_sector5_id).filter(sector6_id=kks_sector6_id).filter(
+            tech_speciality_id=kks_sector7_id).filter(type_doc_id=kks_sector8_id)
+        if len(kks_code_queryset) == 0:
+            index_number = 1
+        else:
+            index_number = len(kks_code_queryset) + 1
+
+        index_number_str = str(index_number).rjust(4, '0')
+
+        content = {'kks_sector1_text': request.COOKIES['kks_sector1_text'],
+                   'kks_sector2_text': request.COOKIES['kks_sector2_text'],
+                   'kks_sector3_text': request.COOKIES['kks_sector3_text'],
+                   'kks_sector4_text': request.COOKIES['kks_sector4_text'],
+                   'kks_sector5_text': request.COOKIES['kks_sector5_text'],
+                   'kks_sector6_text': request.COOKIES['kks_sector6_text'],
+                   'kks_sector7_text': request.COOKIES['kks_sector7_text'],
+                   'kks_sector8_text': kks_type_document_text,
+                   'kks_sector9_text': index_number_str}
+        resp = render(request, 'kks_reestr_app/ajax/sector_9.html', content)
+        resp.set_cookie(key='kks_sector8_id', value=kks_type_document_id)
+        resp.set_cookie(key='kks_sector8_text', value=kks_type_document_text)
+        resp.set_cookie(key='kks_sector9_text', value=index_number_str)
+
+        return resp
