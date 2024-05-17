@@ -11,7 +11,7 @@
         <form method="POST" class="d-flex flex-column mt-4" id="id-sector6-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
-                    <div class="nav-prev-generator"></div>
+                    <div class="nav-prev-generator" onclick="onClickToSector53()"></div>
                 </div>
 
                 <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
@@ -61,12 +61,14 @@
             url: id_inside_place_7,
             data: form.serialize(),
             success: function (data) {
-                $('#id_inside_place_6').animate({opacity: 0}, 200)
+                {#$('#id_inside_place_6').animate({opacity: 0}, 200)#}
                 $('#id_inside_place_6').removeClass('d-flex')
                 $('#id_inside_place_6').addClass('d-none')
-                $('#id_inside_place_6_1').animate({opacity: 0}, 200)
+                {#$('#id_inside_place_6_1').animate({opacity: 0}, 200)#}
                 $('#id_inside_place_6_1').removeClass('d-flex')
                 $('#id_inside_place_6_1').addClass('d-none')
+                $('#id_inside_place_7').removeClass('d-none')
+                $('#id_inside_place_7').addClass('d-flex')
                 $("#id_inside_place_7").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector6_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
@@ -75,4 +77,19 @@
             }
         })
     })
+
+    function onClickToSector53() {
+        $('#id_inside_place_6').removeClass('d-flex')
+        $('#id_inside_place_6').addClass('d-none')
+        $('#id_inside_place_6_1').removeClass('d-flex')
+        $('#id_inside_place_6_1').addClass('d-none')
+        $('#id_inside_place_5').removeClass('d-none')
+        $('#id_inside_place_5').addClass('d-flex')
+        $('#id_inside_place_5').animate({opacity: 1}, 200)
+        $('#sector_6').text('XXXXX')
+        $('#sector_6').css({'color': '#cccccc'})
+        $('#sector_5').text('XXXXXX')
+        $('#sector_5').css({'color': '#cccccc'})
+
+    }
 </script>

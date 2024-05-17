@@ -11,7 +11,7 @@
         <form method="POST" class="d-flex flex-column mt-4" id="id-sector7-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
-                    <div class="nav-prev-generator"></div>
+                    <div class="nav-prev-generator" onclick="onClickToSector6()"></div>
                 </div>
 
                 <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
@@ -58,9 +58,11 @@
             url: id_inside_place_8,
             data: form.serialize(),
             success: function (data) {
-                $('#id_inside_place_7').animate({opacity: 0}, 200)
+                {#$('#id_inside_place_7').animate({opacity: 0}, 200)#}
                 $('#id_inside_place_7').removeClass('d-flex')
                 $('#id_inside_place_7').addClass('d-none')
+                $('#id_inside_place_8').removeClass('d-none')
+                $('#id_inside_place_8').addClass('d-flex')
                 $("#id_inside_place_8").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector7_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
@@ -69,4 +71,25 @@
             }
         })
     })
+
+    function onClickToSector6() {
+        $('#id_inside_place_7').removeClass('d-flex')
+        $('#id_inside_place_7').addClass('d-none')
+        var cookieObjectValue1 = (document.cookie.match('(^|; )' + encodeURIComponent('kks_type_doc') + '=([^;]+)') || []).pop() || null;
+        console.log(cookieObjectValue1, typeof (cookieObjectValue1))
+        if (cookieObjectValue1 === '0' || cookieObjectValue1 === '1' || cookieObjectValue1 === '2' || cookieObjectValue1 === '3' || cookieObjectValue1 === '7') {
+            $('#id_inside_place_6').removeClass('d-none')
+            $('#id_inside_place_6').addClass('d-flex')
+            $('#id_inside_place_6').animate({opacity: 1}, 200)
+        } else {
+            $('#id_inside_place_6_1').removeClass('d-none')
+            $('#id_inside_place_6_1').addClass('d-flex')
+            $('#id_inside_place_6_1').animate({opacity: 1}, 200)
+        }
+        $('#sector_7').text('XXX')
+        $('#sector_7').css({'color': '#cccccc'})
+        $('#sector_6').text('XXXXX')
+        $('#sector_6').css({'color': '#cccccc'})
+
+    }
 </script>

@@ -11,7 +11,7 @@
         <form method="POST" class="d-flex flex-column mt-4" id="id-sector4-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
-                    <div class="nav-prev-generator"></div>
+                    <div class="nav-prev-generator" onclick="onClickToSector3()"></div>
                 </div>
 
                 <div class="d-flex flex-row flex-wrap justify-content-between gap-3 w-100">
@@ -20,7 +20,8 @@
                         <div class="d-flex">
                             <input class="input_kks" type="radio" name="kks_type_building_number" value="{{ obj.id }}"
                                    id="{{ obj }}" hidden>
-                            <label for="{{ obj}}">{{ obj.kks_type_building_code }} - {{ obj.kks_type_building_description }}</label>
+                            <label for="{{ obj }}">{{ obj.kks_type_building_code }}
+                                - {{ obj.kks_type_building_description }}</label>
                         </div>
                     {% endfor %}
                 </div>
@@ -48,6 +49,8 @@
                 $('#id_inside_place_4').animate({opacity: 0}, 200)
                 $('#id_inside_place_4').removeClass('d-flex')
                 $('#id_inside_place_4').addClass('d-none')
+                $('#id_inside_place_type_doc').removeClass('d-none')
+                $('#id_inside_place_type_doc').addClass('d-flex')
                 $("#id_inside_place_type_doc").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector4_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
@@ -56,4 +59,17 @@
             }
         })
     })
+
+    function onClickToSector3() {
+        $('#id_inside_place_4').removeClass('d-flex')
+        $('#id_inside_place_4').addClass('d-none')
+        $('#id_inside_place_3').removeClass('d-none')
+        $('#id_inside_place_3').addClass('d-flex')
+        $('#id_inside_place_3').animate({opacity: 1}, 200)
+        $('#sector_4').text('X')
+        $('#sector_4').css({'color': '#cccccc'})
+        $('#sector_3').text('XXX')
+        $('#sector_3').css({'color': '#cccccc'})
+
+    }
 </script>

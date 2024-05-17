@@ -48,6 +48,8 @@
                 $('#id_inside_place_2').animate({opacity: 0}, 200)
                 $('#id_inside_place_2').removeClass('d-flex')
                 $('#id_inside_place_2').addClass('d-none')
+                $('#id_inside_place_3').removeClass('d-none')
+                $('#id_inside_place_3').addClass('d-flex')
                 $("#id_inside_place_3").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector2_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
@@ -58,23 +60,14 @@
     })
 
     function onClickToSector1() {
-        var get_objects_url = $("#id_inside_place").attr("data-ajax-url");
-        console.log(get_objects_url)
-        setTimeout(function () {
-            $.ajax({                       // формируем AJAX запрос
-                url: get_objects_url,                    // подгружаем URL адрес для запроса
-                data: {
-                    'get_objects_url': get_objects_url    // добавляем objectID в query параметры GET запроса
-                },
-                success: function (data) {   // `data` результат выполнения  функции `load_contract`
-                    $("#id_inside_place").html(data)
-                    $('#id_inside_place_2').removeClass('d-flex')
-                    $('#id_inside_place_2').addClass('d-none')
-                    $('#id_inside_place').removeClass('d-none')
-                    $('#id_inside_place').addClass('d-flex')
-                    $('#id_inside_place').animate({opacity: 1}, 200)
-                }
-            })
-        }, 400);
+        $('#id_inside_place_2').removeClass('d-flex')
+        $('#id_inside_place_2').addClass('d-none')
+        $('#id_inside_place').removeClass('d-none')
+        $('#id_inside_place').addClass('d-flex')
+        $('#id_inside_place').animate({opacity: 1}, 200)
+        $('#sector_2').text('X')
+        $('#sector_2').css({'color': '#cccccc'})
+        $('#sector_1').text('XXXX')
+        $('#sector_1').css({'color': '#cccccc'})
     }
 </script>

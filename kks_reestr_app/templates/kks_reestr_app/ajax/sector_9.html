@@ -12,7 +12,7 @@
             {% csrf_token %}
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
-                    <div class="nav-prev-generator"></div>
+                    <div class="nav-prev-generator" onclick="onClickToSector8()"></div>
                 </div>
 
                 <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100 text-24px-light">
@@ -47,7 +47,8 @@
                                 aria-label="Закрыть"></button>
                     </div>
                     {% endcomment %}
-                    <div class="modal-body flex-column justify-content-center align-items-center " style="height: 150px; display: flex">
+                    <div class="modal-body flex-column justify-content-center align-items-center "
+                         style="height: 150px; display: flex">
                         <div class="text-18px-light" style="display: flex; margin-top: 5px">
                             Сохранить kks код в базу данных?
                         </div>
@@ -56,7 +57,8 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" style="min-width: 200px;" class="button_grey_modal_outline" data-bs-dismiss="modal"
+                        <button type="button" style="min-width: 200px;" class="button_grey_modal_outline"
+                                data-bs-dismiss="modal"
                                 onclick="$('#show_save_approve').modal('hide');">Отмена
                         </button>
                         <form method="POST" action="{% url 'approve-save' %}">
@@ -74,6 +76,20 @@
                 // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
                 $('[data-toggle="tooltip"]').tooltip();
             });
+
+            function onClickToSector8() {
+                $('#id_inside_place_9').removeClass('d-flex')
+                $('#id_inside_place_9').addClass('d-none')
+                $('#id_inside_place_8').removeClass('d-none')
+                $('#id_inside_place_8').addClass('d-flex')
+                $('#id_inside_place_8').animate({opacity: 1}, 200)
+                $('#sector_9').text('XXXX')
+                $('#sector_9').css({'color': '#cccccc'})
+                $('#sector_8').text('XX')
+                $('#sector_8').css({'color': '#cccccc'})
+
+            }
+
             /*
                 $('#id-approve-form').submit(function (e) {
                     e.preventDefault()

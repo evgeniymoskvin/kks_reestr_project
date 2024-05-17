@@ -11,7 +11,7 @@
         <form method="POST" class="d-flex flex-column mt-4" id="id-sector3-form">
             <div class="d-flex flex-row justify-content-between gap-3">
                 <div class="d-flex align-items-center">
-                    <div class="nav-prev-generator"></div>
+                    <div class="nav-prev-generator" onclick="onClickToSector2()"></div>
                 </div>
 
                 <div class="d-flex flex-row flex-wrap justify-content-between gap-3">
@@ -48,6 +48,8 @@
                 $('#id_inside_place_3').animate({opacity: 0}, 200)
                 $('#id_inside_place_3').removeClass('d-flex')
                 $('#id_inside_place_3').addClass('d-none')
+                $('#id_inside_place_4').removeClass('d-none')
+                $('#id_inside_place_4').addClass('d-flex')
                 $("#id_inside_place_4").html(data)
                 var cookieObjectValue = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector3_text') + '=([^;]+)') || []).pop() || null;
                 console.log(cookieObjectValue)
@@ -56,4 +58,18 @@
             }
         })
     })
+
+    function onClickToSector2() {
+        $('#id_inside_place_3').removeClass('d-flex')
+        $('#id_inside_place_3').addClass('d-none')
+        $('#id_inside_place_2').removeClass('d-none')
+        $('#id_inside_place_2').addClass('d-flex')
+        $('#id_inside_place_2').animate({opacity: 1}, 200)
+        $('#sector_3').text('XXX')
+        $('#sector_3').css({'color': '#cccccc'})
+        $('#sector_2').text('X')
+        $('#sector_2').css({'color': '#cccccc'})
+
+    }
+
 </script>

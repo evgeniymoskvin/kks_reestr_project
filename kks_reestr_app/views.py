@@ -403,9 +403,10 @@ class ApproveSaveCodeView(View):
         )
         new_kks_code.save()
         print(new_kks_code)
-        content = {
-        }
-        resp = render(request, 'kks_reestr_app/index.html', content)  # Страница переадресации
+        user = EmployeeModel.objects.get(user=request.user)
+        objects = KksCodeModel.objects.get_queryset().filter(author_id=user.id).order_by('-id')
+        content = {"objects": objects}
+        resp = render(request, 'kks_reestr_app/my-kks-codes.html', content)  # Страница переадресации
         # Чистим cookies
         cookies_list = ['kks_sector1_text', 'kks_sector2_text', 'kks_sector3_text', 'kks_sector4_text',
                         'kks_sector5_text', 'kks_sector6_text', 'kks_sector7_text', 'kks_sector8_text',

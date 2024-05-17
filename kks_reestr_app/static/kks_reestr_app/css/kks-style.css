@@ -264,7 +264,6 @@
 }
 
 
-
 .input_kks {
     display: none;
     gap: 20px;
@@ -318,8 +317,22 @@
 
 .nav-prev-generator:hover {
     background-color: #1D222A;
-
 }
+
+.nav-prev-generator-first {
+    display: flex;
+    -webkit-mask-image: url("../icons/left.svg");
+    mask-image: url("../icons/left.svg");
+    width: 47px;
+    height: 10px;
+    background-color: #cccccc;
+    -webkit-mask-position: center center;
+    mask-position: center center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    transition-duration: .15s;
+}
+
 
 .nav-next-generator {
     display: flex;
