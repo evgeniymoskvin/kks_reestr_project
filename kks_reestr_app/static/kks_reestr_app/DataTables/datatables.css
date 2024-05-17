@@ -4143,15 +4143,37 @@ textarea.form-control-lg {
 
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn-group:not(:last-child) > .btn {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: 8px;
+    height: 31px;
+    align-items: center;
+    justify-content: center;
+    /*border-top-right-radius: 0;*/
+    /*border-bottom-right-radius: 0;*/
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+}
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle):hover {
+    color: #E35454;
 }
 
 .btn-group > .btn:nth-child(n+3),
 .btn-group > :not(.btn-check) + .btn,
 .btn-group > .btn-group:not(:first-child) > .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 8px;
+    height: 31px;
+    /*border-top-left-radius: 0;*/
+    /*border-bottom-left-radius: 0;*/
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);;
+    font-family: "Rosatom_light", serif;
+    color: #1D222A;
+}
+
+.btn-group > :not(.btn-check) + .btn:hover {
+    color: #5FAD05;
 }
 
 .dropdown-toggle-split {

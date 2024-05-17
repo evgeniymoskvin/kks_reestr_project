@@ -404,3 +404,55 @@
     font-family: "Rosatom_regular", serif;
     font-size: 15px;
 }
+
+
+.pdf_button_icon {
+    box-sizing: content-box;
+    /*padding: .25em .25em;*/
+    margin-top: 3px;
+    mask-image: url('../icons/filetype-pdf.svg');
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background: #000;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 0px;
+    height: 40px;
+    /*width: 10px;*/
+    padding-left: 16px; /* Or size of icon + spacing */
+    opacity: .5;
+    transition: all .1s ease-in-out;
+}
+
+.pdf_button_icon:hover {
+    background: #E35454;
+    text-decoration: none;
+    opacity: 1
+}
+
+
+.exel_button_icon {
+    box-sizing: content-box;
+    /*padding: .25em .25em;*/
+    margin-top: 3px;
+    mask-image: url('../icons/filetype-xls.svg');
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background: #000;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 0px;
+    height: 40px;
+    /*width: 10px;*/
+    padding-left: 16px; /* Or size of icon + spacing */
+    opacity: .5;
+    transition: all .1s ease-in-out;
+}
+
+.exel_button_icon:hover {
+    background: #5FAD05;
+    text-decoration: none;
+    opacity: 1
+}
