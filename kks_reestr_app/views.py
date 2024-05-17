@@ -30,7 +30,6 @@ class IndexView(View):
         return resp
 
 
-@method_decorator(login_required(login_url='login'))
 def get_objects(request):
     """Функция получения списка объектов"""
     print('Sector1')

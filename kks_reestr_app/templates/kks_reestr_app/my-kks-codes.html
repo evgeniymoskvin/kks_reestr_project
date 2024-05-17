@@ -1,11 +1,70 @@
 {% extends "kks_reestr_app/base.html" %}
 {% load static %}
+{% load kks_tags %}
 {% block title %}
     Все kks-коды
 {% endblock %}
 
 {% block content %}
-    {% for obj in objects %}
-        {{ obj }}<br>
-    {% endfor %}
+    <div style="width: 100%">
+        <div class="text-36px-bold mt-5">
+            Коды KKS - {% get_name user %}
+        </div>
+        <div class="mt-3">
+            <table id="all-kks-codes" class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="th_tables" scope="col">#</th>
+                    <th class="th_tables" scope="col">KKS код</th>
+                    <th class="th_tables" scope="col" style="text-align: center">Дата</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for obj in objects %}
+                    <tr class="tr-tables" style="cursor: context-menu">
+                        <th class="th_tables" scope="row" style="width: 30px">{{ forloop.counter }}</th>
+                        <td class="td_tables">
+                            {{ obj.text }}</td>
+                        <td class="td_tables" style="width: 150px; text-align: center">
+                            {{ obj.add_date.date }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            var table = $('#all-kks-codes').DataTable({
+                    {#order: [[1, 'asc']],#}
+                    dom:
+                    //"<'row'<'col-sm-12'tr>>",
+                        "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    "language": {
+                        "lengthMenu": "_MENU_",
+                        "zeroRecords": "Записи не найдены",
+                        "info": "Показано с _START_ по _END_ из _TOTAL_ записей",
+                        "search": "Поиск:",
+                        "paginate": {
+                            "next": "Следующая",
+                            "previous": "Предыдущая"
+                        }
+                    },
+                    "aLengthMenu": [[1, 5, 10, 15, 20, 25, -1], [1, 5, 10, 15, 20, 25, "Все"]],
+                    "iDisplayLength": -1,
+                    buttons: ['pdf', 'excel']
+                }
+            );
+            {#table.buttons().container()#}
+            {#    .appendTo($('.col-sm-6:eq(0)', table.table().container()));#}
+        });
+    </script>
+
 {% endblock %}
