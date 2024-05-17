@@ -123,6 +123,7 @@
     display: block
 }
 
+
 .select2-results__options {
     list-style: none;
     margin: 0;
@@ -136,7 +137,8 @@
 }
 
 .select2-results__option--selectable {
-    cursor: pointer
+    cursor: default;
+    font-family: "Rosatom_light", serif;
 }
 
 .select2-container--open .select2-dropdown {
@@ -467,7 +469,7 @@
 }
 
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #5897fb;
+    background-color: rgb(108, 172, 228);
     color: white
 }
 
