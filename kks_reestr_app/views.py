@@ -120,7 +120,7 @@ class GetTypeDocView(View):
 
 
 class GetSector5View(View):
-    """Сектор 4"""
+    """Сектор 5"""
 
     def post(self, request):
         print('sector5')
@@ -139,7 +139,7 @@ class GetSector5View(View):
                        'high_marks': high_marks}
             resp = render(request, 'kks_reestr_app/ajax/sector_5.2.html', content)
         else:
-            content = {}
+            content = {'kks_type_doc_id': kks_type_doc_id}
             resp = render(request, 'kks_reestr_app/ajax/sector_5.1.html', content)
         # Устанавливаем cookies с типом документации
         resp.set_cookie(key='kks_type_doc', value=kks_type_doc_id)
@@ -242,7 +242,11 @@ class GetSector7View(View):
         print(f'REQUEST: {request.POST}')
         print(f'COOKIES: {request.COOKIES}')
         kks_type_doc_id = int(request.COOKIES['kks_type_doc'])
-        kks_building_construction = int(request.COOKIES['kks_building_construction'])
+        try:
+            kks_building_construction = int(request.COOKIES['kks_building_construction'])
+        except Exception as e:
+            print(e)
+            kks_building_construction = 0
         if kks_type_doc_id == 0 or kks_type_doc_id == 1 or kks_type_doc_id == 2 or kks_type_doc_id == 3:
             # Если ОБИН, ПООБ, Предпроектная документация или Том проектной документации
             input_sector6_txt1 = request.POST.get('input_sector6_txt1')

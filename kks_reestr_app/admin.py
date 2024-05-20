@@ -116,7 +116,7 @@ class KKSThematicDirectionAdmin(admin.ModelAdmin):
 # admin.site.register(EmployeeModel, EmployeeAdmin)
 # admin.site.register(EmployeeModel)
 # admin.site.register(MoreDetailsEmployeeModel, MoreDetailsEmployeeAdmin)
-admin.site.register(KksCodeSystemOrganizationModel, KksCodeSystemOrganizationAdmin)
+# admin.site.register(KksCodeSystemOrganizationModel, KksCodeSystemOrganizationAdmin)
 admin.site.register(KksExecutionConstructionModel, KksExecutionConstructionAdmin)
 admin.site.register(KksCodeModel, KksCodeAdmin)
 admin.site.register(KksSector5Model, KksSector5Admin)

@@ -4,7 +4,7 @@
             Сектор 6:
         </div>
         <div class="d-flex text-18px-light">
-            Заполните поля согласно инструкции
+            Заполните поля согласно&nbsp<a class="dashed_text" href="#" onclick="onClickHelpSector61()">инструкции</a>
         </div>
     </div>
     <div class="d-flex flex-column w-100">
@@ -25,7 +25,12 @@
                         <div class="d-flex">
                             <input class="input_text" type="text" id="input_sector6_txt2" name="input_sector6_txt2"
                                    required minlength="2"
-                                   maxlength="2" placeholder="Код номера части">
+                                   maxlength="2"
+                                    {% if kks_type_doc_id == 0 %}
+                                   placeholder="Код номера части ОБИН">
+                                    {% else %}
+                                        placeholder="Номер части ПООБ">
+                                    {% endif %}
                         </div>
                         <div class="d-flex">
                             <input class="input_text" type="text" id="input_sector6_txt3" name="input_sector6_txt3"
@@ -34,7 +39,11 @@
                                    maxlength="1" value="&" disabled
                                    data-toggle="tooltip" data-bs-placement="bottom"
                                    rel="txtTooltip" data-bs-html="true"
-                                   title="Для ОБИН и ПООБ данное поле не заполняется">
+                                    {% if kks_type_doc_id == 0 %}
+                                   title="Для ОБИН данное поле не заполняется">
+                                    {% else %}
+                                        title="Для ПООБ данное поле не заполняется">
+                                    {% endif %}
                         </div>
                     {% else %}
                         <div>
@@ -64,10 +73,67 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <input class="nav-next-generator" type="submit">
+                    <input class="nav-next-generator" type="submit" value="">
                 </div>
             </div>
         </form>
+    </div>
+
+
+    <!-- Инструкция -->
+    <div id="help_text_sector61" class="help_text d-none flex-column">
+        <div class="text-18px-bold mt-5">
+            Инструкция
+        </div>
+        <div class="text-18px-light">
+            {% if kks_type_doc_id == 0 %}
+                <!-- Для ОБИН -->
+                <div class="text-align-justify">
+                    <div>
+                        <ol class="num_list">
+                            <li>
+                                Первые два символа сектора 6 – код номера книги. <br>
+                                Для книги 1 – код «01», для книги 2 – код «02» и т.д. <br>
+                                При отсутствии разбиения раздела на книги первые два символа сектора 6 заполняются
+                                замещающим символом;
+
+                            </li>
+                            <li>
+                                Третий и четвертый символы сектора 6 – код номера части ОБИН.<br>
+                                Для части 1 код – «01», для части 2 – код «02» и т.д.<br>
+                                В случае если разбивка на части отсутствует, на месте третьего и четвертого цифровых
+                                символов ставят замещающие символы &&;
+
+                            </li>
+                            <li>
+                                Пятый символ сектора 6 заполняется замещающим символом «&»;
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            {% elif kks_type_doc_id == 1 %}
+                <!-- Для ПООБ -->
+                <div class="text-align-justify">
+                    <div>
+                        <ol class="num_list">
+                            <li>
+                                Первые два символа сектора 6 – код номера книги.<br>
+                                Для книги 1 – код «01», для книги 2 – код «02» и т.д.<br>
+                                При отсутствии разбиения на книги первые два символа сек-тора 6 заполняются замещающим
+                                символом «&»;
+                            </li>
+                            <li>
+                                Третий и четвертый символ – указывается номер части ПООБ (ООБ) в случае, когда
+                                количество листов в документе превышает 300 шт.;
+                            </li>
+                            <li>
+                                Пятый символ сектора 6 заполняется замещающим символом «&»;
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
     </div>
 </div>
 
@@ -101,6 +167,23 @@
             }
         })
     })
+
+
+    function onClickHelpSector61() {
+        if ($('#help_text_sector61').css('opacity') == 0) {
+            $('#help_text_sector61').removeClass('d-none')
+            $('#help_text_sector61').addClass('d-flex')
+            $('#help_text_sector61').animate({opacity: 1}, 400)
+        } else {
+            $('#help_text_sector61').animate({opacity: 0}, 400)
+            $('#help_text_sector61').removeClass('d-flex')
+            setTimeout(function () {
+                $('#help_text_sector61').addClass('d-none')
+            }, 400);
+
+        }
+    }
+
 
     function onClickToSector51() {
         $('#id_inside_place_6').removeClass('d-flex')

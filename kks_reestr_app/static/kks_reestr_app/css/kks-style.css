@@ -58,6 +58,10 @@
 
 }
 
+html {
+    width:100vw;
+    overflow-x:hidden;
+}
 
 .text-48px-bold {
     font-size: 48px;
@@ -119,6 +123,20 @@
     color: #1D222A;
 }
 
+.dashed_text {
+    /*font-size: 25px;*/
+    /*text-decoration: none;*/
+    /*border-bottom: 1px dashed rgb(108, 172, 228);*/
+    color: rgb(108, 172, 228);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.dashed_text:hover {
+    color: #025EA1;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
 
 .content-fade {
     scroll-behavior: smooth;
@@ -303,10 +321,10 @@
 .nav-prev-generator {
     display: flex;
     cursor: pointer;
-    -webkit-mask-image: url("../icons/left.svg");
-    mask-image: url("../icons/left.svg");
+    -webkit-mask-image: url("../icons/left1_5.svg");
+    mask-image: url("../icons/left1_5.svg");
     width: 47px;
-    height: 10px;
+    height: 45px;
     background-color: #025EA1;
     -webkit-mask-position: center center;
     mask-position: center center;
@@ -321,10 +339,10 @@
 
 .nav-prev-generator-first {
     display: flex;
-    -webkit-mask-image: url("../icons/left.svg");
-    mask-image: url("../icons/left.svg");
+    -webkit-mask-image: url("../icons/left1_5.svg");
+    mask-image: url("../icons/left1_5.svg");
     width: 47px;
-    height: 10px;
+    height: 45px;
     background-color: #cccccc;
     -webkit-mask-position: center center;
     mask-position: center center;
@@ -336,10 +354,11 @@
 
 .nav-next-generator {
     display: flex;
-    -webkit-mask-image: url("../icons/right.svg");
-    mask-image: url("../icons/right.svg");
+    -webkit-mask-image: url("../icons/left1_5.svg");
+    mask-image: url("../icons/left1_5.svg");
+    -webkit-transform: rotate(-180deg);
     width: 47px;
-    height: 10px;
+    height: 45px;
     background-color: #025EA1;
     -webkit-mask-position: center center;
     mask-position: center center;
@@ -455,4 +474,42 @@
     background: #5FAD05;
     text-decoration: none;
     opacity: 1
+}
+
+/*Нумерованный список*/
+
+.help_text{
+    opacity: 0;
+}
+
+
+.text-align-justify {
+    text-align: justify;
+}
+
+.num_list {
+    list-style-type: none;
+    counter-reset: num;
+    /*margin: 0 0 0 35px;*/
+    padding-left: 20px;
+    /*margin-left: 0;*/
+    font-size: 18px;
+}
+
+.num_list li {
+    position: relative;
+    margin: 0 0 0 0;
+    padding: 0 0 10px 0;
+}
+
+.num_list li:before {
+    content: counter(num) '.';
+    counter-increment: num;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: -26px;
+    width: 20px;
+    color: rgb(108, 172, 228);
+    text-align: right;
 }
