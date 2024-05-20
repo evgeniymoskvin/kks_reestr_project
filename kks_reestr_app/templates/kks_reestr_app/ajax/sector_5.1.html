@@ -83,7 +83,7 @@
         </form>
     </div>
     <!-- Инструкция -->
-    <div id="help_text_sector5" class="help_text d-none flex-column">
+    <div id="help_text_sector5" class="help_text flex-column">
         <div class="text-18px-bold mt-5">
             Инструкция
         </div>
@@ -242,6 +242,7 @@
                 $('#id_inside_place_5').animate({opacity: 0}, 200)
                 $('#id_inside_place_5').removeClass('d-flex')
                 $('#id_inside_place_5').addClass('d-none')
+                $('#help_text_sector5').animate({opacity: 0}, 400)
                 $('#id_inside_place_6').removeClass('d-none')
                 $('#id_inside_place_6').addClass('d-flex')
                 $("#id_inside_place_6").html(data)
