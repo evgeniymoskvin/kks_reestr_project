@@ -135,6 +135,7 @@ admin.site.register(KksHighMarkModel, KksHighMarkAdmin)
 admin.site.register(KksChangesHistoryModel, KksChangesHistoryAdmin)
 admin.site.register(KksTypeConstructionModel, KksTypeConstructionAdmin)
 admin.site.register(KKSThematicDirectionModel, KKSThematicDirectionAdmin)
+admin.site.register(EmployeeModel, EmployeeAdmin)
 
 # admin.site.register(MoreDetailsEmployeeModel)
 # admin.site.register(GroupDepartmentModel, GroupDepartmentAdmin)

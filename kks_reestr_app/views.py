@@ -213,13 +213,15 @@ class GetSector61View(View):
         print('Sector6.1')
         print(f'REQUEST: {request.POST}')
         print(f'COOKIES: {request.COOKIES}')
+        kks_type_doc_id = int(request.COOKIES['kks_type_doc'])
         kks_building_construction = int(
             request.POST.get('kks_building_construction'))  # Проверка на строительную конструкцию
         if kks_building_construction == 0:
             # Если конструкция не строительная
             objects = KksCodeSystemModel.objects.get_queryset().filter(kks_system_visible=True).order_by(
                 'kks_system_abr')  # KKS коды систем
-            content = {'objects': objects}
+            content = {'objects': objects,
+                       'kks_type_doc_id': kks_type_doc_id}
             resp = render(request, 'kks_reestr_app/ajax/sector_6.3.2.html', content)
         else:
             # Если конструкция строительная

@@ -17,8 +17,8 @@
 
                 <div class="d-flex flex-row flex-wrap justify-content-center gap-3 w-100">
                     {% csrf_token %}
-                    <div class="d-flex">
-                        <select class="form-select" style="min-width: 300px" name="kks_code_system_id"
+                    <div class="d-flex" style="width: calc(100% - 200px)">
+                        <select class="form-select" style="width: 100%" name="kks_code_system_id"
                                 id="kks_code_system_id">
                             <option selected>Функционально-технологическая система</option>
                             {% for obj in objects %}
@@ -77,7 +77,7 @@
                         </ol>
                     </div>
                 </div>
-            {% elif kks_type_doc_id == 5 or kks_type_doc_id == 6%}
+            {% elif kks_type_doc_id == 5 %}
                 <!-- Для структурных единиц проектной документации -->
                 <div class="text-align-justify">
                     <div>
@@ -112,9 +112,14 @@
 </div>
 
 <script>
+
     $(function () {
         // инициализации подсказок для всех элементов на странице, имеющих атрибут data-toggle="tooltip"
         $('[data-toggle="tooltip"]').tooltip();
+
+        $('#kks_code_system_id').select2({
+            placeholder: 'Функционально-технологическая система',
+        });
     });
 
     $('#id-sector6-form').submit(function (e) {
