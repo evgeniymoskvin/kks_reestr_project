@@ -309,7 +309,7 @@ class GetSector8View(View):
         return resp
 
 
-class GetSector9View(View):
+class ModalSaveView(View):
     """Сектор 9"""
 
     def post(self, request):
@@ -349,7 +349,7 @@ class GetSector9View(View):
                    'kks_sector7_text': request.COOKIES['kks_sector7_text'],
                    'kks_sector8_text': kks_type_document_text,
                    'kks_sector9_text': index_number_str}
-        resp = render(request, 'kks_reestr_app/ajax/sector_9.html', content)
+        resp = render(request, 'kks_reestr_app/ajax/modal_window.html', content)
         resp.set_cookie(key='kks_sector8_id', value=kks_type_document_id)
         resp.set_cookie(key='kks_sector8_text', value=kks_type_document_text)
         resp.set_cookie(key='kks_sector9_text', value=index_number_str)
@@ -412,7 +412,17 @@ class ApproveSaveCodeView(View):
         user = EmployeeModel.objects.get(user=request.user)
         objects = KksCodeModel.objects.get_queryset().filter(author_id=user.id).order_by('-id')
         content = {"objects": objects}
-        resp = render(request, 'kks_reestr_app/my-kks-codes.html', content)  # Страница переадресации
+
+        content = {'kks_sector1_text': kks_sector1_text,
+                   'kks_sector2_text': kks_sector2_text,
+                   'kks_sector3_text': kks_sector3_text,
+                   'kks_sector4_text': kks_sector4_text,
+                   'kks_sector5_text': kks_sector5_text,
+                   'kks_sector6_text': kks_sector6_text,
+                   'kks_sector7_text': kks_sector7_text,
+                   'kks_sector8_text': kks_sector8_text,
+                   'kks_sector9_text': kks_sector9_text}
+        resp = render(request, 'kks_reestr_app/ajax/sector_9.html', content)
         # Чистим cookies
         cookies_list = ['kks_sector1_text', 'kks_sector2_text', 'kks_sector3_text', 'kks_sector4_text',
                         'kks_sector5_text', 'kks_sector6_text', 'kks_sector7_text', 'kks_sector8_text',

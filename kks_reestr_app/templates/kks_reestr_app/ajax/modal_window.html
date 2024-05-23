@@ -1,0 +1,55 @@
+<div class="modal-body flex-column justify-content-center align-items-center "
+     style="height: 150px; display: flex">
+    <div class="text-18px-light" style="display: flex; margin-top: 5px">
+        Предварительный kks код
+    </div>
+    <div class="text-24px-light" style="display: flex">
+        <div class="noselect">
+            {{ kks_sector1_text }}.{{ kks_sector2_text }}.{{ kks_sector3_text }}.{{ kks_sector4_text }}.{{ kks_sector5_text }}.{{ kks_sector6_text }}.{{ kks_sector7_text }}.{{ kks_sector8_text }}.{{ kks_sector9_text }}
+        </div>
+    </div>
+</div>
+<div class="modal-footer justify-content-center">
+    <button type="button" style="min-width: 200px;" class="button_grey_modal_outline"
+            data-bs-dismiss="modal"
+            onclick="$('#show_save_approve').modal('hide');">Отмена
+    </button>
+    <form method="POST" id="id-sector8-modal-form">
+        {% csrf_token %}
+        <button class="button_blue_modal_outline" style="min-width: 200px;" type="submit">
+            Сохранить
+        </button>
+    </form>
+</div>
+
+<script>
+        $('#id-sector8-modal-form').submit(function (e) {
+        e.preventDefault()
+
+        var form = $(this)
+        var id_inside_place_9 = $("#id_inside_place_9").attr("data-ajax-url")
+
+        $.ajax({
+            type: "POST",
+            url: id_inside_place_9,
+            data: form.serialize(),
+            success: function (data) {
+                $('#show_preview_approve').modal('hide');
+                $('#id_inside_place_8').animate({opacity: 0}, 200)
+                $('#id_inside_place_8').removeClass('d-flex')
+                $('#id_inside_place_8').addClass('d-none')
+                $('#id_inside_place_9').removeClass('d-none')
+                $('#id_inside_place_9').addClass('d-flex')
+                $("#id_inside_place_9").html(data)
+                /*var cookieObjectValueSector8 = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector8_text') + '=([^;]+)') || []).pop() || null;
+                console.log(cookieObjectValueSector8)
+                $('#sector_8').text(cookieObjectValueSector8)
+                $('#sector_8').css({'color': '#1D222A'})
+                var cookieObjectValueSector9 = (document.cookie.match('(^|; )' + encodeURIComponent('kks_sector9_text') + '=([^;]+)') || []).pop() || null;
+                console.log(cookieObjectValueSector9)
+                $('#sector_9').text(cookieObjectValueSector9)
+                $('#sector_9').css({'color': '#1D222A'})*/
+            }
+        })
+    })
+</script>
