@@ -1,24 +1,3 @@
-@font-face {
-    font-family: 'golos500';
-    src: url('../fonts/golos/500/font.woff2') format('woff2'),
-    url('../fonts/golos/500/font.woff') format('woff'),
-    url('../fonts/golos/500/font.eot') format('eot');
-url('../fonts/golos/500/font.ttf') format('ttf');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'golos400';
-    src: url('../fonts/golos/400/font.woff2') format('woff2'),
-    url('../fonts/golos/400/font.woff') format('woff'),
-    url('../fonts/golos/400/font.eot') format('eot');
-url('../fonts/golos/400/font.ttf') format('ttf');
-    font-weight: bold;
-    font-style: normal;
-}
-
-
 .loader-big {
     width: 100px;
     height: 100px;
