@@ -31,7 +31,9 @@ class IndexView(View):
 
 
 def get_objects(request):
-    """Функция получения списка объектов"""
+    """
+    Функция получения списка объектов
+    """
     print('Sector1')
     objects = KksObjectModel.objects.get_queryset().filter(kks_object_show=True).order_by('kks_object_abr')
     content = {'objects': objects}
@@ -190,7 +192,6 @@ class GetSector6View(View):
             link = f'kks_reestr_app/ajax/sector_6.2_question.html'
             content = {'result': result,
                        'kks_type_doc_id': kks_type_doc_id}
-
         else:
             # в остальных случаях
             objects = KksCodeSystemModel.objects.get_queryset().filter(kks_system_visible=True).order_by(
