@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '45.132.18.6', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['http://45.132.18.6']
 # Application definition
 
 INSTALLED_APPS = [
