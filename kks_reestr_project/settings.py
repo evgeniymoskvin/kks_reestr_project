@@ -134,7 +134,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 SESSION_COOKIE_DOMAIN = '45.132.18.6'
-SESSION_COOKIE_NAME = 'testsessionid'
+SESSION_COOKIE_NAME = 'testsessionidkks'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
