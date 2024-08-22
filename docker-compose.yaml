@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  kks_codes:
+    restart: always
+    build: ./
+    volumes:
+      - ./:/app
+    command: python manage.py runserver 0.0.0.0:8001
+    ports:
+      - "8001:8001"
+
